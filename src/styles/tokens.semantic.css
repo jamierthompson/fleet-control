@@ -119,6 +119,17 @@
 
   --diff-context-gutter: var(--color-neutral-700);
 
+  /* ─── size.* — intent-based dimensions ─────────────────────────────
+     Components must consume these instead of reaching for raw
+     --size-* primitives. Add a new alias here whenever a primitive
+     needs a dimension that does not yet have a semantic name. */
+
+  --size-pulse: var(--size-dot-xs);   /* Live pulse indicator (topbar, footer) */
+
+  /* ─── motion.* — intent-based animation durations ──────────────── */
+
+  --motion-pulse: var(--motion-duration-pulse); /* Live pulse opacity loop */
+
   /* ─── code.editor.* — editor chrome (Screen 5) ─────────────────── */
 
   --code-editor-surface: var(--color-bg-code);
