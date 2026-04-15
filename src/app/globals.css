@@ -1,11 +1,17 @@
 /* ─────────────────────────────────────────────────────────────
    Global baseline.
 
-   NOTE: The hex values below are placeholders for the scaffold
-   commit only. The next task introduces the full design token
-   system (primitive + semantic CSS custom properties) and these
-   hardcoded colors will be replaced with var() references.
+   Primitive design tokens are loaded below. Semantic tokens and
+   their usage in components will arrive in the next commits.
+
+   The body rules still use a handful of hardcoded hex values.
+   This is intentional: components consume SEMANTIC tokens, not
+   primitives, and the semantic layer does not exist yet. Once
+   tokens.semantic.css lands, the hex values here will be
+   replaced with var(--surface-background) / var(--text-brand).
    ───────────────────────────────────────────────────────────── */
+
+@import "../styles/tokens.primitive.css";
 
 * {
   box-sizing: border-box;
