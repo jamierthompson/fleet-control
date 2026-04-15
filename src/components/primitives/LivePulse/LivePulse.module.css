@@ -1,0 +1,34 @@
+/* LivePulse — 6px nominal-green square with a 1.6s opacity pulse.
+   Used inline next to live-status text in the topbar (WS · LIVE)
+   and footer (STREAM OK). The element is intentionally a square,
+   not a circle: it matches the phosphor-CRT pixel aesthetic of the
+   rest of the dashboard, where rounded shapes are reserved for
+   data glyphs in the timeline. */
+
+.pulse {
+  display: inline-block;
+  width: var(--size-pulse);
+  height: var(--size-pulse);
+  background: var(--text-signal-nominal);
+  vertical-align: middle;
+  animation: pulse var(--motion-pulse) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Respect users who have asked the OS to reduce motion. The dot
+   stays visible at full opacity instead of pulsing — the live-ness
+   signal is carried by the surrounding text in those cases. */
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

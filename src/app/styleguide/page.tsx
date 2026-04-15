@@ -2,6 +2,7 @@ import { Fragment } from "react";
 
 import type { Metadata } from "next";
 
+import { LivePulse } from "@/components/primitives/LivePulse";
 import typo from "@/styles/typography.module.css";
 
 import styles from "./page.module.css";
@@ -290,6 +291,32 @@ export default function Styleguide() {
           are added.
         </p>
       </header>
+
+      {/* ─── Primitives ──────────────────────────────────────────── */}
+      <section className={styles.section}>
+        <h2 className={`${typo.labelMicro} ${styles.sectionTitle}`}>Primitives</h2>
+        <p className={`${typo.bodySm} ${styles.pageLead}`}>
+          The reusable React building blocks that compose every screen in
+          Fleet Control. Each entry below is rendered live — what you see
+          here is what ships.
+        </p>
+
+        <div className={styles.primitiveGrid}>
+          {/* LivePulse — 6px nominal-green dot, 1.6s opacity pulse. */}
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo}>
+              <LivePulse />
+              <span className={typo.labelXs}>WS · LIVE</span>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>LivePulse</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Live-stream indicator. Topbar (WS · LIVE) and footer (STREAM OK).
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ─── Semantic colors ─────────────────────────────────────── */}
       <section className={styles.section}>
