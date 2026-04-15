@@ -17,7 +17,7 @@ A working reference that captures where the project is, the conventions being fo
 | 5 | Composite typography styles        | `feat/typography-styles`        | #4  |
 | 6 | `/styleguide` page                 | `feat/styleguide-page`          | #5  |
 | 7 | `LivePulse` primitive              | `feat/live-pulse-primitive`    | #7  |
-| 8 | `StatusPip` primitive              | `feat/status-pip-primitive`    | TBD |
+| 8 | `StatusPip` primitive              | `feat/status-pip-primitive`    | #9  |
 
 What exists:
 
