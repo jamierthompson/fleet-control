@@ -6,7 +6,7 @@ A working reference that captures where the project is, the conventions being fo
 
 ## Status
 
-**Design system foundation is complete.** Tasks 1–6 below are all merged to `main`.
+**Design system foundation is complete and the first primitive has landed.** Tasks 1–7 below are all merged to `main`.
 
 | # | Task                               | Branch                          | PR  |
 | - | ---------------------------------- | ------------------------------- | --- |
@@ -16,6 +16,7 @@ A working reference that captures where the project is, the conventions being fo
 | 4 | Semantic design tokens             | `feat/design-tokens-semantic`   | #3  |
 | 5 | Composite typography styles        | `feat/typography-styles`        | #4  |
 | 6 | `/styleguide` page                 | `feat/styleguide-page`          | #5  |
+| 7 | `LivePulse` primitive              | `feat/live-pulse-primitive`    | #7  |
 
 What exists:
 
