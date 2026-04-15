@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local design-phase references — seeded the project, not the source of truth.
+# The authoritative design lives in src/styles/ and the /styleguide page.
+/docs/fleet-control-tokens.md
+/docs/fleet-control-tokens.json
+/docs/fleet-control.html
+/docs/screen-5-permissions.html
