@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 
 import { LivePulse } from "@/components/primitives/LivePulse";
+import { StatusPip } from "@/components/primitives/StatusPip";
 import typo from "@/styles/typography.module.css";
 
 import styles from "./page.module.css";
@@ -312,6 +313,40 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>LivePulse</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Live-stream indicator. Topbar (WS · LIVE) and footer (STREAM OK).
+              </span>
+            </div>
+          </div>
+
+          {/* StatusPip — small status dot, four signal variants + muted default,
+              two sizes (xs default, sm for posture pill). */}
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo}>
+              <StatusPip variant="crit" />
+              <StatusPip variant="linked" />
+              <StatusPip variant="nominal" />
+              <StatusPip variant="stale" />
+              <StatusPip />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>StatusPip · xs</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                crit · linked · nominal · stale · muted (default)
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo}>
+              <StatusPip size="sm" variant="crit" />
+              <StatusPip size="sm" variant="linked" />
+              <StatusPip size="sm" variant="nominal" />
+              <StatusPip size="sm" variant="stale" />
+              <StatusPip size="sm" />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>StatusPip · sm</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Larger 8px size used in the posture pill.
               </span>
             </div>
           </div>

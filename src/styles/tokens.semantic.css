@@ -125,10 +125,20 @@
      needs a dimension that does not yet have a semantic name. */
 
   --size-pulse: var(--size-dot-xs);   /* Live pulse indicator (topbar, footer) */
+  --size-pip-xs: var(--size-dot-xs);  /* StatusPip default — 6px (class-heads, agent rows) */
+  --size-pip-sm: var(--size-dot-sm);  /* StatusPip small — 8px (posture pill, event glyphs) */
 
   /* ─── motion.* — intent-based animation durations ──────────────── */
 
   --motion-pulse: var(--motion-duration-pulse); /* Live pulse opacity loop */
+
+  /* ─── glow.* — phosphor halos on signal indicators ──────────────
+     Components must consume these instead of raw --glow-* primitives,
+     so the indicator system is reskinnable in one place. Only crit
+     and linked glow today; the other signal variants are flat. */
+
+  --glow-signal-crit: var(--glow-crit);
+  --glow-signal-linked: var(--glow-linked);
 
   /* ─── code.editor.* — editor chrome (Screen 5) ─────────────────── */
 

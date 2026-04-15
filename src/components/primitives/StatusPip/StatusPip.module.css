@@ -1,0 +1,46 @@
+/* StatusPip — small inline status indicator dot.
+   A square (intentionally not a circle, to match the phosphor-CRT
+   pixel aesthetic of the rest of the dashboard). The default state
+   is muted gray — the "no signal" pip used at the head of agent
+   class groups when nothing in the group is degraded. Variant
+   classes override the fill and, for crit and linked, add a glow. */
+
+.pip {
+  display: inline-block;
+  vertical-align: middle;
+  background: var(--text-tertiary);
+}
+
+/* Sizes — xs is the default (6px), sm is used in the posture pill (8px). */
+
+.xs {
+  width: var(--size-pip-xs);
+  height: var(--size-pip-xs);
+}
+
+.sm {
+  width: var(--size-pip-sm);
+  height: var(--size-pip-sm);
+}
+
+/* Variants — fill colors come from the signal text tokens, glow
+   from the dedicated glow.signal.* tokens. Only crit and linked
+   carry a halo; nominal and stale are intentionally flat. */
+
+.crit {
+  background: var(--text-signal-crit);
+  box-shadow: var(--glow-signal-crit);
+}
+
+.linked {
+  background: var(--text-signal-linked);
+  box-shadow: var(--glow-signal-linked);
+}
+
+.nominal {
+  background: var(--text-signal-nominal);
+}
+
+.stale {
+  background: var(--text-signal-stale);
+}
