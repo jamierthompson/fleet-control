@@ -286,9 +286,9 @@ export default function Styleguide() {
       <header className={styles.pageHeader}>
         <h1 className={typo.headingLg}>Fleet Control · Styleguide</h1>
         <p className={`${typo.bodyMd} ${styles.pageLead}`}>
-          A live reference for every design token and text style in the system.
-          Updated alongside <code>fleet-control-tokens.md</code> as new primitives
-          are added.
+          A live reference for every design token, text style, and primitive
+          in the system. This page is the source of truth — if it is not
+          here, it does not exist.
         </p>
       </header>
 
