@@ -1,0 +1,207 @@
+/* ═════════════════════════════════════════════════════════════════════
+   FLEET CONTROL — PRIMITIVE DESIGN TOKENS
+   ─────────────────────────────────────────────────────────────────────
+   The raw palette, type ramp, and dimensional scales.
+
+   These are the foundation layer of the token system. Components MUST
+   NOT reference primitives directly — they should always consume the
+   semantic tokens defined in tokens.semantic.css, which alias into
+   these primitives.
+
+   This separation exists so the entire UI can be re-skinned (e.g. a
+   green-phosphor mode) by swapping only this file, without touching
+   any component styles.
+
+   Source of truth: fleet-control-tokens.md (in /Users/jamiethompson/dev).
+
+   Naming convention
+   ─────────────────
+   The md uses dot notation (color.bg.0). CSS custom properties cannot
+   contain dots, so each dot becomes a hyphen: color.bg.0 → --color-bg-0.
+   ═════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── color.bg.* — surface darks ──────────────────────────────────
+     Warm-black surface ramp. Each step is roughly 1 unit lighter
+     than the last. Used for page, panel, raised, and elevated
+     surfaces plus the code editor pane. */
+
+  --color-bg-0: #0a0907;    /* Page background, footer, topbar */
+  --color-bg-1: #121110;    /* Default panel */
+  --color-bg-2: #181614;    /* Raised panel — card headers, hover */
+  --color-bg-3: #1f1c18;    /* Elevated — inline code, nested cells */
+  --color-bg-code: #0c0a07; /* Code editor pane, deeper than bg-0 */
+
+  /* ─── color.line.* — borders ─────────────────────────────────── */
+
+  --color-line-1: #2a2520;   /* Subtle internal divider */
+  --color-line-2: #3d3527;   /* Default panel border */
+  --color-line-hot: #5c4a2c; /* Incident group / threat findings */
+
+  /* ─── color.amber.* — brand scale ─────────────────────────────────
+     The signature amber. 500 is the canonical brand value. Lower
+     numbers are brighter; higher numbers are dimmer. */
+
+  --color-amber-300: #ffc863;                   /* Bright — emphasis, hover */
+  --color-amber-500: #ffa724;                   /* Brand — default, primary */
+  --color-amber-700: #b8841c;                   /* Dim — secondary labels */
+  --color-amber-900: #6b5028;                   /* Mute — hairlines only */
+  --color-amber-tint: rgba(255, 167, 36, 0.04); /* Current-line highlight */
+
+  /* ─── color.neutral.* — foreground neutrals ───────────────────────
+     Note: "white" is a warm cream (#f0e6d2), not pure #ffffff. Pure
+     white blows out against the amber palette. */
+
+  --color-neutral-100: #f0e6d2; /* "White" — primary readable text */
+  --color-neutral-500: #7a6e58; /* Muted — labels, secondary text */
+  --color-neutral-700: #4f463a; /* Muted-2 — disabled, tertiary */
+  --color-neutral-0: #000000;   /* Pure black — on amber/linked fills */
+  --color-neutral-ink: #1a1408; /* Dark amber-black — on linked fills */
+
+  /* ─── color.signal.* — status palette ─────────────────────────────
+     Six status hues: crit, linked, stale, warn, nominal, info. Each
+     has a primary; several also define bg (surface tint), edge
+     (border), ink (text-on-fill), and -tint (low-alpha) variants. */
+
+  /* crit — critical alert (red) */
+  --color-signal-crit: #ff3a2e;
+  --color-signal-crit-bg: #2a0e0a;
+  --color-signal-crit-edge: #6b1f17;
+  --color-signal-crit-ink: #ffe6e2;
+  --color-signal-crit-tint: rgba(255, 58, 46, 0.09); /* Diff removed bg */
+
+  /* linked — correlated / cross-agent finding (warm yellow) */
+  --color-signal-linked: #ffd166;
+  --color-signal-linked-bg: #2a2010;
+  --color-signal-linked-edge: #6b5520;
+  --color-signal-linked-ink: #fff1c4;
+
+  /* stale — silent agent / fleet-health concern (gray) */
+  --color-signal-stale: #8a8275;
+  --color-signal-stale-bg: #1a1816;
+
+  /* warn — warning (amber-orange) */
+  --color-signal-warn: #ffb800;
+
+  /* nominal — healthy / OK (green) */
+  --color-signal-nominal: #3da55c;
+  --color-signal-nominal-edge: #20502d;
+  --color-signal-nominal-tint: rgba(61, 165, 92, 0.09); /* Diff added bg, "new" */
+
+  /* info — neutral informational (cyan) */
+  --color-signal-info: #6cb4d4;
+
+  /* ─── font.family ─────────────────────────────────────────────────
+     JetBrains Mono is the only font in the system. It is self-hosted
+     via next/font in layout.tsx, which exposes the CSS variable
+     --font-jetbrains-mono. The token below wraps that variable and
+     adds system-mono fallbacks. */
+
+  --font-family-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ─── font.size ───────────────────────────────────────────────────
+     Half-pixel sizes are intentional for Bloomberg-style density.
+     Used as explicit px values, not rem, because the terminal
+     aesthetic does not need user-scaled type. */
+
+  --font-size-2xs: 8.5px;  /* Micro labels, caption timestamps */
+  --font-size-xs: 9px;     /* Function-key labels, axis ticks */
+  --font-size-sm: 9.5px;   /* Small uppercase labels, badges */
+  --font-size-base: 10px;  /* Standard label, button text */
+  --font-size-md: 10.5px;  /* List rows, secondary body */
+  --font-size-lg: 11px;    /* Body, agent IDs, code inline */
+  --font-size-xl: 12px;    /* Card finding titles */
+  --font-size-body: 12.5px;/* Default body size */
+  --font-size-2xl: 13px;   /* Incident header title, posture name */
+  --font-size-3xl: 14px;   /* Card agent ID, section heading */
+  --font-size-4xl: 18px;   /* Heading numerals */
+  --font-size-5xl: 30px;   /* Summary cell big numbers */
+
+  /* ─── font.weight ──────────────────────────────────────────── */
+
+  --font-weight-light: 300;    /* Reserved — not in current use */
+  --font-weight-regular: 400;  /* Body */
+  --font-weight-medium: 500;   /* Sibling names, secondary IDs */
+  --font-weight-semibold: 600; /* Labels, IDs, headings */
+  --font-weight-bold: 700;     /* Numerics, badges, button text */
+  --font-weight-heavy: 800;    /* Brand wordmark, incident ID chip */
+
+  /* ─── font.tracking — letter-spacing ───────────────────────────── */
+
+  --font-tracking-tight: -0.02em;       /* Display numerics */
+  --font-tracking-zero: 0;              /* Code — monospace reads better unspaced */
+  --font-tracking-body: 0.01em;         /* Default body */
+  --font-tracking-id: 0.02em;           /* Agent IDs */
+  --font-tracking-heading: 0.04em;      /* Card titles, finding titles */
+  --font-tracking-label: 0.06em;        /* Standard labels, axis ticks */
+  --font-tracking-label-wide: 0.08em;   /* Topbar items, status meta */
+  --font-tracking-caps: 0.10em;         /* UPPERCASE labels, button text */
+  --font-tracking-caps-wide: 0.12em;    /* Brand, status badges, actions */
+  --font-tracking-caps-x-wide: 0.14em;  /* Strongest emphasis, micro-caps */
+  --font-tracking-caps-xx-wide: 0.16em; /* Floating section labels */
+
+  /* ─── font.leading — line-height ──────────────────────────────── */
+
+  --font-leading-flat: 1.0;   /* Big numerics, single-line tags */
+  --font-leading-tight: 1.2;  /* Card head IDs */
+  --font-leading-body: 1.35;  /* Default body */
+  --font-leading-prose: 1.5;  /* Finding descriptions, prose */
+  --font-leading-code: 1.7;   /* Code editor — looser aids scanning */
+
+  /* ─── space — spacing scale ───────────────────────────────────────
+     2px-based. The token name IS the pixel value — no step-index to
+     remember. Use these for padding, margin, and gap. */
+
+  --space-0: 0;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+
+  /* ─── size — component dimensions ────────────────────────────── */
+
+  --size-dot-xs: 6px;          /* Live pulse, status pip */
+  --size-dot-sm: 8px;          /* Posture blob, small event glyph */
+  --size-dot-md: 12px;         /* Event glyph */
+  --size-icon-sm: 14px;        /* Caret, line-icons in roster row */
+  --size-icon-md: 16px;        /* Avatar, missed-list bullet */
+  --size-bar-topbar: 32px;     /* Top status bar height */
+  --size-bar-posture: 56px;    /* Posture strip height */
+  --size-bar-footer: 26px;     /* Footer height */
+  --size-timeline-height: 90px;/* Queue timeline panel height */
+  --size-rail-width: 308px;    /* Left roster rail width */
+
+  /* ─── border.width ───────────────────────────────────────────── */
+
+  --border-width-0: 0;
+  --border-width-1: 1px; /* All standard borders */
+  --border-width-2: 2px; /* Cell top accent, active rail border */
+  --border-width-3: 3px; /* Card crit/stale left accent */
+
+  /* ─── border.radius ───────────────────────────────────────────────
+     The system is intentionally square. Only one radius exists, and
+     it is zero. Do not add more. */
+
+  --border-radius-none: 0;
+
+  /* ─── motion ──────────────────────────────────────────────────── */
+
+  --motion-duration-fast: 100ms;   /* Hover transitions on rows */
+  --motion-duration-base: 120ms;   /* Default UI transitions */
+  --motion-duration-enter: 200ms;  /* Cards/elements entering view */
+  --motion-duration-exit: 150ms;   /* Handled work leaving the brief */
+  --motion-duration-pulse: 1600ms; /* Live indicator pulse */
+  --motion-duration-blink: 1050ms; /* Critical badge blink */
+
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* Default */
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);       /* Accelerate-out */
+}
