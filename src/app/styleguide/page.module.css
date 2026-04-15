@@ -1,0 +1,179 @@
+/* ═════════════════════════════════════════════════════════════════════
+   STYLEGUIDE — PAGE LAYOUT
+   ─────────────────────────────────────────────────────────────────────
+   Layout chrome for the /styleguide page only. Typography for sample
+   text comes from typography.module.css. Colors and sizes come from
+   the token layer via semantic and primitive CSS custom properties.
+
+   This file should never contain hardcoded design values — only
+   layout (grid, flex, gap, max-width) using var() references.
+   ═════════════════════════════════════════════════════════════════════ */
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--space-32) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-bottom: var(--space-20);
+  border-bottom: var(--border-width-1) solid var(--border-default);
+}
+
+.pageLead {
+  color: var(--text-secondary);
+  max-width: 640px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.sectionTitle {
+  color: var(--text-brand-dim);
+  padding-bottom: var(--space-6);
+  border-bottom: var(--border-width-1) solid var(--border-subtle);
+}
+
+.subsectionTitle {
+  color: var(--text-secondary);
+  margin-top: var(--space-8);
+}
+
+/* ─── Colors ────────────────────────────────────────────────────── */
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-12);
+}
+
+.colorCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-panel);
+  border: var(--border-width-1) solid var(--border-default);
+}
+
+.colorSwatch {
+  height: 56px;
+  border-bottom: var(--border-width-1) solid var(--border-default);
+}
+
+.colorMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-8) var(--space-10);
+}
+
+.tokenName {
+  color: var(--text-primary);
+}
+
+.tokenAlias {
+  color: var(--text-secondary);
+}
+
+.tokenValue {
+  color: var(--text-brand-dim);
+}
+
+.tokenRole {
+  color: var(--text-tertiary);
+}
+
+/* ─── Typography ────────────────────────────────────────────────── */
+
+.typeList {
+  display: flex;
+  flex-direction: column;
+}
+
+.typeRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-20);
+  align-items: baseline;
+  padding: var(--space-12) 0;
+  border-bottom: var(--border-width-1) solid var(--border-subtle);
+}
+
+.typeLabel {
+  color: var(--text-secondary);
+}
+
+.typeSample {
+  color: var(--text-primary);
+}
+
+/* ─── Spacing ───────────────────────────────────────────────────── */
+
+.spacingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.spacingRow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.spacingBar {
+  height: 8px;
+  background: var(--surface-brand-fill);
+}
+
+/* ─── Dimensions / Borders ──────────────────────────────────────── */
+
+.dimensionList,
+.borderList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.dimensionRow,
+.borderRow {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: var(--space-16);
+  align-items: center;
+  padding: var(--space-6) 0;
+  border-bottom: var(--border-width-1) solid var(--border-subtle);
+}
+
+.dimensionSample {
+  background: var(--text-brand);
+}
+
+.borderSample {
+  width: 160px;
+  border-top-style: solid;
+  border-top-color: var(--text-brand);
+}
+
+/* ─── Motion ────────────────────────────────────────────────────── */
+
+.motionTable {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-8) var(--space-16);
+  align-items: baseline;
+}
+
+.motionTable > * {
+  padding: var(--space-4) 0;
+  border-bottom: var(--border-width-1) solid var(--border-subtle);
+}
