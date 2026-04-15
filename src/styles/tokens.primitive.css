@@ -204,4 +204,15 @@
 
   --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* Default */
   --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);       /* Accelerate-out */
+
+  /* ─── glow ────────────────────────────────────────────────────────
+     Box-shadow halos used on phosphor-style indicators. The values
+     are full box-shadow declarations (offset/blur baked in) so that
+     consumers only need to set `box-shadow: var(--glow-*)`. The
+     RGBA channels are derived from color.signal.* and intentionally
+     not tied to those vars, since CSS box-shadow cannot consume
+     a separate alpha from a hex primitive. */
+
+  --glow-crit:   0 0 6px rgba(255, 58, 46, 0.6);   /* Red phosphor halo */
+  --glow-linked: 0 0 6px rgba(255, 209, 102, 0.5); /* Yellow phosphor halo */
 }
