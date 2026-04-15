@@ -1,0 +1,129 @@
+/* ═════════════════════════════════════════════════════════════════════
+   FLEET CONTROL — SEMANTIC DESIGN TOKENS
+   ─────────────────────────────────────────────────────────────────────
+   The intent-based layer components actually consume.
+
+   Every variable here is an alias to a primitive via var(). Never
+   hardcode a color, size, or typographic value in a component style
+   — always pull from this file. If you find yourself reaching for a
+   primitive directly, stop and ask whether a semantic token should
+   exist for that intent and add it here.
+
+   The separation from tokens.primitive.css exists so the entire UI
+   can be re-skinned by swapping primitive values without touching
+   any component or any alias defined below.
+
+   Source of truth: fleet-control-tokens.md (in /Users/jamiethompson/dev).
+   Must be imported AFTER tokens.primitive.css.
+   ═════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── surface.* ────────────────────────────────────────────────── */
+
+  --surface-background: var(--color-bg-0);
+  --surface-panel: var(--color-bg-1);
+  --surface-panel-raised: var(--color-bg-2);
+  --surface-panel-elevated: var(--color-bg-3);
+  --surface-bar-fill: var(--color-neutral-0);
+  --surface-brand-fill: var(--color-amber-500);
+  --surface-signal-crit: var(--color-signal-crit-bg);
+  --surface-signal-linked: var(--color-signal-linked-bg);
+  --surface-signal-stale: var(--color-signal-stale-bg);
+
+  /* ─── border.* ─────────────────────────────────────────────────── */
+
+  --border-subtle: var(--color-line-1);
+  --border-default: var(--color-line-2);
+  --border-strong: var(--color-line-hot);
+  --border-signal-crit: var(--color-signal-crit-edge);
+  --border-signal-linked: var(--color-signal-linked-edge);
+  --border-signal-stale: var(--color-signal-stale);
+  --border-signal-nominal: var(--color-signal-nominal-edge);
+
+  /* ─── text.* — foreground ──────────────────────────────────────── */
+
+  --text-primary: var(--color-neutral-100);
+  --text-secondary: var(--color-neutral-500);
+  --text-tertiary: var(--color-neutral-700);
+
+  --text-brand: var(--color-amber-500);
+  --text-brand-bright: var(--color-amber-300);
+  --text-brand-dim: var(--color-amber-700);
+
+  /* Status text */
+  --text-signal-crit: var(--color-signal-crit);
+  --text-signal-linked: var(--color-signal-linked);
+  --text-signal-stale: var(--color-signal-stale);
+  --text-signal-warn: var(--color-signal-warn);
+  --text-signal-nominal: var(--color-signal-nominal);
+  --text-signal-info: var(--color-signal-info);
+
+  /* Text-on-fill — always pair with the matching surface. */
+  --text-on-brand: var(--color-neutral-0);
+  --text-on-linked: var(--color-neutral-ink);
+  --text-on-crit: var(--color-neutral-100);
+  --text-on-crit-row: var(--color-signal-crit-ink);
+  --text-on-linked-row: var(--color-signal-linked-ink);
+
+  /* Confidence tiers — amber ramp mapped to a confidence scale. */
+  --text-confidence-below: var(--color-amber-700);
+  --text-confidence-standard: var(--color-amber-500);
+  --text-confidence-high: var(--color-amber-300);
+  --text-confidence-delta-up: var(--color-signal-linked);
+  --text-confidence-delta-down: var(--color-neutral-500);
+
+  /* Inline correction callouts. */
+  --text-annotation: var(--color-signal-info);
+
+  /* ─── action.* — button intent colors ──────────────────────────── */
+
+  --action-primary-bg: var(--color-amber-500);
+  --action-primary-bg-hover: var(--color-amber-300);
+  --action-primary-text: var(--color-neutral-0);
+
+  --action-crit-bg: var(--color-signal-crit);
+  --action-crit-text: var(--color-neutral-100);
+
+  --action-default-text: var(--color-amber-500);
+  --action-ghost-text: var(--color-neutral-500);
+
+  --action-text-hover: var(--color-amber-300);
+  --action-bg-hover: var(--color-bg-2);
+
+  /* ─── code.syntax.* — DSL syntax highlighting (Screen 5) ───────────
+     The rule editor on Screen 5 uses these to color tokens within a
+     code block. All bind to existing primitives — no new hues
+     introduced. If readability ever becomes an issue, the easiest
+     fix is introducing a dedicated string or number primitive. */
+
+  --code-syntax-keyword: var(--color-amber-300);      /* rule, when, then, and, or */
+  --code-syntax-function: var(--color-signal-info);   /* lock_account, page_oncall */
+  --code-syntax-identifier: var(--color-neutral-100); /* actor, time, access */
+  --code-syntax-property: var(--color-neutral-100);   /* .type, .hour, .ip */
+  --code-syntax-string: var(--color-signal-linked);   /* "service_account" */
+  --code-syntax-number: var(--color-signal-info);     /* 0.75, 2, true */
+  --code-syntax-operator: var(--color-neutral-500);   /* ==, !=, :, -> */
+  --code-syntax-punctuation: var(--color-amber-700);  /* brackets, parens, dots */
+  --code-syntax-comment: var(--color-neutral-700);    /* # comment lines */
+
+  /* ─── diff.* — diff display (Screen 5) ─────────────────────────────
+     Reuses signal hues — nominal for added, crit for removed. */
+
+  --diff-added-bg: var(--color-signal-nominal-tint);
+  --diff-added-gutter: var(--color-signal-nominal);
+  --diff-added-border: var(--color-signal-nominal-edge);
+
+  --diff-removed-bg: var(--color-signal-crit-tint);
+  --diff-removed-gutter: var(--color-signal-crit);
+  --diff-removed-border: var(--color-signal-crit-edge);
+
+  --diff-context-gutter: var(--color-neutral-700);
+
+  /* ─── code.editor.* — editor chrome (Screen 5) ─────────────────── */
+
+  --code-editor-surface: var(--color-bg-code);
+  --code-editor-gutter-bg: var(--color-bg-0);
+  --code-editor-gutter-text: var(--color-neutral-700);
+  --code-editor-current-line-bg: var(--color-amber-tint);
+  --code-editor-current-line-border: var(--color-amber-900);
+}

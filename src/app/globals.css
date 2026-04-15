@@ -1,17 +1,19 @@
 /* ─────────────────────────────────────────────────────────────
    Global baseline.
 
-   Primitive design tokens are loaded below. Semantic tokens and
-   their usage in components will arrive in the next commits.
+   The token layer is loaded in order: primitives first, then
+   semantics (which alias into primitives). Import order matters
+   — semantics resolve var() lookups against primitives.
 
-   The body rules still use a handful of hardcoded hex values.
-   This is intentional: components consume SEMANTIC tokens, not
-   primitives, and the semantic layer does not exist yet. Once
-   tokens.semantic.css lands, the hex values here will be
-   replaced with var(--surface-background) / var(--text-brand).
+   The body rule below is the first "real" consumer of the token
+   pipeline. Color values use semantic tokens; typographic values
+   reference primitives directly because the md does not define a
+   semantic typography layer (composite text styles will live in
+   typography.module.css in the next commit).
    ───────────────────────────────────────────────────────────── */
 
 @import "../styles/tokens.primitive.css";
+@import "../styles/tokens.semantic.css";
 
 * {
   box-sizing: border-box;
@@ -25,16 +27,15 @@ body {
 }
 
 body {
-  /* Temporary hardcoded baseline — will become var(--surface-background) etc. */
-  background: #0a0907;
-  color: #ffa724;
-  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 12.5px;
-  line-height: 1.35;
-  font-weight: 400;
+  background: var(--surface-background);
+  color: var(--text-brand);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-body);
+  line-height: var(--font-leading-body);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--font-tracking-body);
   -webkit-font-smoothing: antialiased;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
 }
 
 a {
