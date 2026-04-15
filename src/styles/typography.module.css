@@ -1,0 +1,220 @@
+/* ═════════════════════════════════════════════════════════════════════
+   FLEET CONTROL — COMPOSITE TYPOGRAPHY STYLES
+   ─────────────────────────────────────────────────────────────────────
+   The 24 named text recipes from fleet-control-tokens.md, each a
+   complete bundle of family + weight + size + leading + tracking
+   (+ case) that components apply as a single class.
+
+   Usage (in a .tsx component):
+
+     import type from "@/styles/typography.module.css";
+     <span className={type.labelMd}>AGENTS</span>
+
+   Every class pulls from primitive tokens only — no hardcoded values.
+   Classes that share traits use CSS Modules `composes:` so shared
+   properties are declared once. The 24 public class names are still
+   a flat, independent surface from a consumer's point of view.
+
+   Source of truth: "Typography styles (composite)" section of
+   fleet-control-tokens.md.
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* ─── Internal shared bases ────────────────────────────────────────── */
+
+/* Every composite style starts here: JetBrains Mono as the family. */
+.base {
+  font-family: var(--font-family-mono);
+}
+
+/* Shared by every uppercase label/button — a convenience composition
+   so each public class only needs to declare its own size/weight. */
+.upper {
+  composes: base;
+  text-transform: uppercase;
+}
+
+/* ─── display.* — giant numerics ───────────────────────────────────── */
+
+.displayXl {
+  composes: base;
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-tight);
+}
+
+.displayLg {
+  composes: base;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-heading);
+}
+
+/* ─── heading.* — card and section titles ─────────────────────────── */
+
+.headingLg {
+  composes: base;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-heading);
+}
+
+.headingMd {
+  composes: base;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-heading);
+}
+
+.headingSm {
+  composes: base;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-heading);
+}
+
+/* ─── body.* — prose and default text ─────────────────────────────── */
+
+.bodyMd {
+  composes: base;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-body);
+  letter-spacing: var(--font-tracking-body);
+}
+
+.bodySm {
+  composes: base;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-prose);
+  letter-spacing: var(--font-tracking-body);
+}
+
+.bodyXs {
+  composes: base;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-prose);
+  letter-spacing: var(--font-tracking-heading);
+}
+
+/* ─── code.* — inline and editor code ─────────────────────────────── */
+
+.codeInline {
+  composes: base;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-body);
+  letter-spacing: var(--font-tracking-body);
+}
+
+.codeEditor {
+  composes: base;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-leading-code);
+  letter-spacing: var(--font-tracking-zero);
+}
+
+/* ─── id.agent — roster agent IDs ─────────────────────────────────── */
+
+.idAgent {
+  composes: base;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-id);
+}
+
+/* ─── label.* — uppercase class and cell labels ───────────────────── */
+
+.labelLg {
+  composes: upper;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-caps);
+}
+
+.labelMd {
+  composes: upper;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-caps-x-wide);
+}
+
+.labelSm {
+  composes: upper;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-caps-x-wide);
+}
+
+.labelXs {
+  composes: upper;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-caps-x-wide);
+}
+
+.labelMicro {
+  composes: upper;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-caps-xx-wide);
+}
+
+/* ─── button.* — action label styles ──────────────────────────────── */
+
+.buttonPrimary {
+  composes: upper;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-caps-wide);
+}
+
+.buttonSecondary {
+  composes: upper;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-caps);
+}
+
+.buttonTertiary {
+  composes: upper;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-label-wide);
+}
+
+/* ─── caption — event timestamps under glyphs ─────────────────────── */
+
+.caption {
+  composes: base;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-label);
+}
+
+/* ─── brand.wordmark — SENTRYOS / FLEET topbar lockup ─────────────── */
+
+.brandWordmark {
+  composes: upper;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-caps-wide);
+}
