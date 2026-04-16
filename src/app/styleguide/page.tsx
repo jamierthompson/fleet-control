@@ -2,6 +2,7 @@ import { Fragment } from "react";
 
 import type { Metadata } from "next";
 
+import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { LivePulse } from "@/components/primitives/LivePulse";
 import { StatusPip } from "@/components/primitives/StatusPip";
 import typo from "@/styles/typography.module.css";
@@ -347,6 +348,28 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>StatusPip · sm</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Larger 8px size used in the posture pill.
+              </span>
+            </div>
+          </div>
+
+          {/* BlinkDot — 6px square that blinks on a 1.05s 2-step loop.
+              Inherits color from its parent via currentColor, so we set
+              text color on the demo wrappers to show it in the two
+              palettes it actually appears in (crit and linked badges). */}
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo}>
+              <span style={{ color: "var(--text-signal-crit)" }}>
+                <BlinkDot />
+              </span>
+              <span style={{ color: "var(--text-signal-linked)" }}>
+                <BlinkDot />
+              </span>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>BlinkDot</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Inherits currentColor. Composed inside Badge for NOW · CRIT
+                and PROPOSED states.
               </span>
             </div>
           </div>

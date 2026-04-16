@@ -1,0 +1,30 @@
+/* BlinkDot — 6px square that blinks its opacity on a 1.05s 2-step loop.
+   Designed to sit inside a Badge whose foreground colour we want to
+   inherit, so background uses currentColor. The 2-step animation is
+   intentional — it's a hard on/off blink, not a smooth pulse like
+   LivePulse — to read as a more urgent "attention" signal in the
+   crit and linked badges where it appears. */
+
+.blink {
+  display: inline-block;
+  width: var(--size-blink);
+  height: var(--size-blink);
+  background: currentColor;
+  vertical-align: middle;
+  animation: blink var(--motion-blink) steps(2) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Reduced-motion users see a static, fully-opaque dot. The blink
+   carries no information that the surrounding badge text does not
+   already convey — so freezing it is safe. */
+@media (prefers-reduced-motion: reduce) {
+  .blink {
+    animation: none;
+  }
+}
