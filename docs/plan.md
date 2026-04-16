@@ -29,9 +29,8 @@ What exists:
 - **Semantic tokens** in `src/styles/tokens.semantic.css` — intent-based aliases (`--surface-panel`, `--text-brand`, `--border-signal-crit`) that reference primitives. Components must consume these, never primitives.
 - **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
-- **Vitest + RTL + jest-dom** wired up with one smoke test and one styleguide render test. Add a test alongside every primitive.
-
-What's next: primitives (Tasks 7+).
+- **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
+- **Four Tier-1 primitives shipped**: `LivePulse`, `StatusPip`, `BlinkDot`, and `Badge`. The next primitive in the Tier-1 list is `KeyValueRow`.
 
 ---
 
@@ -65,6 +64,10 @@ These were established in the design-system phase and should hold throughout the
 
 - **Every new primitive gets a styleguide entry in the same PR that introduces it.** No exceptions. The styleguide is the source of truth for "what exists," and drift between code and styleguide is the failure mode we're preventing.
 - Styleguide entries should show: the primitive rendered in each of its variants, its props (if any), and its position in the composition hierarchy.
+
+### Plan status updates
+
+- **Add a row to the status table at the top of this file in the same PR that ships a primitive.** The table is the at-a-glance view of project progress — if it lags reality, it loses its point. The PR number can be backfilled in a tiny follow-up commit after `gh pr create` returns the URL, but the row itself goes in during the main change.
 
 ### Testing
 
@@ -102,15 +105,15 @@ When building a primitive, open the mockup in a browser (`open docs/fleet-contro
 
 ## Primitive inventory
 
-The `fleet-control.html` mockup divides cleanly into nine visual regions. Each region needs its own primitives; some primitives recur across regions (`Badge`, `KeyValueRow`). This inventory is a rough map — expect to discover more as we go.
+The `fleet-control.html` mockup divides cleanly into nine visual regions. Each region needs its own primitives; some primitives recur across regions and are tracked in a shared "leaves" section at the end. This inventory is a rough map — expect to discover more as we go.
 
-Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives with no dependencies are "leaves" and should be built first.
+Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives with no dependencies are "leaves" and should be built first. Shipped primitives are marked **✓ (PR #N)** inline with a brief note on the as-built behaviour.
 
 ### 1. Top status bar
 
 *Full-width black bar with brand chip, breadcrumb path, live meta, clock, user chip.*
 
-- **`LivePulse`** — the animated pulsing dot (6px circle, 1.6s opacity pulse). Used in the topbar and footer "STREAM OK" status. **No dependencies. Build first.**
+- **`LivePulse`** ✓ (#7) — shipped as a 6px *square* (not a circle — matches the phosphor-pixel aesthetic) in nominal green, 1.6s opacity pulse. Server Component, presentational (aria-hidden). Used in the topbar and footer "STREAM OK" status.
 - **`BrandChip`** — amber-filled "SENTRYOS/FLEET" wordmark at the left of the bar. `brandWordmark` typography, black-on-amber.
 - **`BreadcrumbPath`** — the `CONTROL › NOW · LOG · REPLAY · PERMISSIONS · COMPLIANCE` nav element. Highlights the current segment.
 - **`TopBarMeta`** — "WS · LIVE" with `LivePulse` + "BUILD 2026.04.15-r3". Composed.
@@ -122,11 +125,11 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 *The 56px-tall strip below the topbar with the current posture, "4 ITEMS NEED YOU" heading, and action buttons.*
 
-- **`PostureBlob`** — the colored dot indicating current posture severity (amber, linked, or crit). Variant of a generic dot primitive or its own thing.
-- **`Posture`** — "Posture ELEVATED ▲47m" label + blob + trend. Composed.
+- **`PostureBlob`** ✓ (#9) — consolidated into `StatusPip` as `size="sm"`; use `<StatusPip size="sm" variant="linked" />` (or similar) for the posture pill dot. No separate primitive.
+- **`Posture`** — "Posture ELEVATED ▲47m" label + blob + trend. Composed. **[→ depends on: StatusPip]**
 - **`StripAction`** — the `↻ REFRESH`, `⤓ EXPORT`, `⚙ VIEW` buttons. Secondary button style.
-- **`Pill`** — the "1 OPEN INCIDENT" and similar inline badges with borders. May generalize to a shared `Badge` primitive — TBD when we see how Cards use badges.
-- **`PostureStrip`** — the container composing all of the above. **[→ depends on: Posture, StripAction, Pill]**
+- **`Pill`** ✓ (#11) — confirmed as `Badge`; the "1 OPEN INCIDENT" and similar inline chips are just `<Badge variant="linked">…</Badge>`. No separate primitive.
+- **`PostureStrip`** — the container composing all of the above. **[→ depends on: Posture, StripAction, Badge]**
 
 ### 3. Left rail (roster)
 
@@ -134,8 +137,8 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 - **`FilterChip`** — the `ALL 24`, `DEMAND 2`, `LINKED 2`, `STALE 1` buttons. Has an active state.
 - **`RosterHeader`** — "FLEET ROSTER · 7 CLASSES" + "24 AGENTS" + filter chips row.
-- **`StatusPip`** — tiny colored dot indicating agent status (crit red, linked yellow, stale gray ring, nominal green). Likely the same primitive as `PostureBlob` — consolidate during the build.
-- **`AgentRow`** — one agent: pip + namespaced ID (`vuln-scanner·prod`) + status badge. **[→ depends on: StatusPip]**
+- **`StatusPip`** ✓ (#9) — shipped as a flat colored 6px/8px square (xs/sm sizes) with variants `crit` | `linked` | `nominal` | `stale`, or the muted gray default when no variant is passed. Consolidated with `PostureBlob`. Crit and linked wear a phosphor halo; nominal and stale are flat. The originally-speculated "stale gray ring" is not how it shipped — stale is just a flat gray square like the others.
+- **`AgentRow`** — one agent: pip + namespaced ID (`vuln-scanner·prod`) + status badge. **[→ depends on: StatusPip, Badge]**
 - **`ClassHeader`** — collapsible group header: caret + class name + count + aggregate pip. Click to collapse.
 - **`ClassGroup`** — `ClassHeader` + list of `AgentRow`s. **[→ depends on: ClassHeader, AgentRow]**
 - **`Roster`** — the whole left rail. **[→ depends on: RosterHeader, ClassGroup]**
@@ -144,8 +147,8 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 *Four stacked cells at the top of the main content area: Demand, Linked, Stale, Nominal — each with a big number.*
 
-- **`StatusBadge`** — the small uppercase badge with color-coded fill and border (`CRIT`, `LINK`, `STALE`, `NOM`). Used in summary cells AND cards AND roster rows — this is a **high-reuse primitive, prioritize building it properly**.
-- **`SummaryCell`** — one cell: top row (label + tag badge), big number (`displayXl`), sub text. Variant-driven (`crit`, `link`, `stale`, `nom`) controls the accent strip color at the top. **[→ depends on: StatusBadge]**
+- **`StatusBadge`** ✓ (#11) — consolidated into `Badge` with `size="sm"` and `appearance="outlined"`. No separate primitive.
+- **`SummaryCell`** — one cell: top row (label + tag badge), big number (`displayXl`), sub text. Variant-driven (`crit`, `link`, `stale`, `nom`) controls the accent strip color at the top. **[→ depends on: Badge]**
 - **`SummaryGrid`** — the four-cell container.
 
 ### 5. Queue timeline
@@ -162,9 +165,9 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 *Panel with header (badge + agent ID + meta) + body (field grid) + action row. The single most-reused primitive in the dashboard.*
 
-- **`KeyValueRow`** — one `<dt>`/`<dd>` pair styled as a labeled field. The label is right-aligned, small, muted; the value is left-aligned, primary text. This is the building block of every card body.
+- **`KeyValueRow`** — one `<dt>`/`<dd>` pair styled as a labeled field. The label is right-aligned, small, muted; the value is left-aligned, primary text. This is the building block of every card body. **Next Tier-1 primitive to build.**
 - **`FieldGrid`** — a vertical stack of `KeyValueRow`s sharing a grid.
-- **`Badge`** — the uppercase status badge used in card headers (`NOW · CRIT`, `LINKED · LOCK`, `STALE · FLEET HEALTH`). Overlaps with `StatusBadge` from section 4 — **consolidate into one primitive with variants**.
+- **`Badge`** ✓ (#11) — shipped with three orthogonal props: `variant` (`crit` | `linked` | `nominal` | `stale`, omitted = muted), `appearance` (`filled` | `outlined`, default outlined), `size` (`sm` | `md`, default md). Consolidates what the inventory originally had as separate `Badge` and `StatusBadge`. Filled is only meaningful for crit and linked; other variants fall back to outlined. Consumers compose `<BlinkDot />` as a child for attention-grabbing states.
 - **`AgentIdBlock`** — namespaced agent ID (`vuln-scanner·prod`) + description line below. Used in card headers.
 - **`CardMeta`** — right-aligned meta rows: `FIRED 03:42 · 39m AGO` + confidence tier.
 - **`ConfidenceChip`** — `CONF 94%` in one of three amber tiers (below/standard/high) plus delta variants. Own primitive because of the tier logic.
@@ -209,60 +212,69 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 - **`FunctionKeyRow`** — the full row of `FunctionKey`s.
 - **`Footer`** — composes `FunctionKeyRow` + `LivePulse` + stream status. **[→ depends on: FunctionKey, LivePulse]**
 
+### Shared leaves
+
+*Primitives that do not belong to any one visual region — reused inside other primitives across the dashboard.*
+
+- **`BlinkDot`** ✓ (#10) — 6px square that blinks 1.05s on a 2-step opacity cycle. `background: currentColor`, so it inherits the surrounding text colour automatically. Composed inside `Badge` for the `NOW · CRIT` dashboard state and the `PROPOSED` permissions-screen state. Was not in the original inventory — discovered during the Badge design conversation.
+
 ---
 
 ## Build order
 
 The principle: **build leaves before branches**. A primitive that composes another must be built after the thing it composes. Inside each tier, order is flexible.
 
-**Tier 1 — zero-dependency leaves (build first).**
+**Tier 1 — zero-dependency leaves.**
 
-1. `LivePulse` — dot with pulse animation
-2. `StatusPip` / `PostureBlob` — colored dots (likely one primitive with variants)
-3. `Badge` / `StatusBadge` — the uppercase status badge used in summary cells, cards, roster, and posture strip. **Highest reuse; invest in getting the variant API right.**
-4. `KeyValueRow` — the core of every card body
-5. `ConfidenceChip` — own primitive because of tier logic
-6. `FilterChip` — roster filter pill
-7. `FunctionKey` — footer function-key button
+1. ✓ `LivePulse` (#7)
+2. ✓ `StatusPip` (#9) — consolidated `StatusPip` + `PostureBlob`
+3. ✓ `BlinkDot` (#10) — discovered during Badge design; composed inside Badge
+4. ✓ `Badge` (#11) — consolidated `Badge` + `StatusBadge`
+5. `KeyValueRow` — the core of every card body. **Next up.**
+6. `ConfidenceChip` — own primitive because of tier logic
+7. `FilterChip` — roster filter pill
+8. `FunctionKey` — footer function-key button
+
+Each tier numbers independently — adding a primitive to one tier does not cascade renumbering through the rest.
 
 **Tier 2 — simple composed primitives.**
 
-8. `AgentRow` ← StatusPip
-9. `AgentIdBlock`
-10. `CardButton` — action row button variants (may need its own primitive or become part of CardActionRow)
-11. `BrandChip`, `UserChip`, `LiveClock`, `TopBarMeta` ← LivePulse
-12. `BreadcrumbPath`
-13. `StripAction`, `Pill` (may be Badge)
-14. `Posture` ← PostureBlob
-15. `StaleMetric`, `SiblingInstance`, `MissedItem`
+1. `AgentRow` ← StatusPip, Badge
+2. `AgentIdBlock`
+3. `CardButton` — action row button variants (may need its own primitive or become part of CardActionRow)
+4. `BrandChip`, `UserChip`, `LiveClock`, `TopBarMeta` ← LivePulse
+5. `BreadcrumbPath`
+6. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
+7. `Posture` ← StatusPip
+8. `StaleMetric`, `SiblingInstance`, `MissedItem`
 
 **Tier 3 — mid-level composed primitives.**
 
-16. `ClassHeader` + `ClassGroup` ← AgentRow
-17. `RosterHeader` ← FilterChip
-18. `SummaryCell` ← StatusBadge/Badge
-19. `TimelineEvent`, `TimelineAxis`, `CorrelationBracket`, `TimelineLegend`
-20. `CardHeader` ← Badge, AgentIdBlock, ConfidenceChip
-21. `FieldGrid` ← KeyValueRow
-22. `CardActionRow` ← CardButton
-23. `IncidentIdChip`, `IncidentHeader`
-24. `StaleMetricGrid`, `SiblingList`, `MissedList`
-25. `Finding` ← ConfidenceChip
+1. `ClassHeader` + `ClassGroup` ← AgentRow
+2. `RosterHeader` ← FilterChip
+3. `SummaryCell` ← Badge
+4. `TimelineEvent`, `TimelineAxis`, `CorrelationBracket`, `TimelineLegend`
+5. `CardHeader` ← Badge, AgentIdBlock, ConfidenceChip
+6. `FieldGrid` ← KeyValueRow
+7. `CardActionRow` ← CardButton
+8. `IncidentIdChip`, `IncidentHeader`
+9. `StaleMetricGrid`, `SiblingList`, `MissedList`
+10. `Finding` ← ConfidenceChip
 
 **Tier 4 — top-level regions.**
 
-26. `TopBar` ← BrandChip, BreadcrumbPath, TopBarMeta, LiveClock, UserChip
-27. `PostureStrip` ← Posture, StripAction, Pill
-28. `Roster` ← RosterHeader, ClassGroup
-29. `SummaryGrid` ← SummaryCell
-30. `QueueTimeline` ← TimelineEvent, TimelineAxis, CorrelationBracket, TimelineLegend
-31. `Card` ← CardHeader, FieldGrid, CardActionRow (crit / linked / stale variants)
-32. `IncidentGroup` ← IncidentHeader, Card
-33. `Footer` ← FunctionKey, LivePulse
+1. `TopBar` ← BrandChip, BreadcrumbPath, TopBarMeta, LiveClock, UserChip
+2. `PostureStrip` ← Posture, StripAction, Badge
+3. `Roster` ← RosterHeader, ClassGroup
+4. `SummaryGrid` ← SummaryCell
+5. `QueueTimeline` ← TimelineEvent, TimelineAxis, CorrelationBracket, TimelineLegend
+6. `Card` ← CardHeader, FieldGrid, CardActionRow (crit / linked / stale variants)
+7. `IncidentGroup` ← IncidentHeader, Card
+8. `Footer` ← FunctionKey, LivePulse
 
 **Tier 5 — the full screen.**
 
-34. Assemble `/` (the `fleet-control.html` equivalent) — a Server Component page that composes every top-level region into the full dashboard layout.
+1. Assemble `/` (the `fleet-control.html` equivalent) — a Server Component page that composes every top-level region into the full dashboard layout.
 
 ---
 
@@ -270,7 +282,7 @@ The principle: **build leaves before branches**. A primitive that composes anoth
 
 If you are picking this up cold:
 
-1. **Read this file first**, then `fleet-control-tokens.md`, then skim `fleet-control.html` to get a visual sense of what's being built.
+1. **Read this file first**, then read `CLAUDE.md` for the stable project rules. If the local design-phase reference docs are present (`docs/fleet-control*.md/.html` — all gitignored), skim `fleet-control.html` to get a visual sense of what's being built. If they are not present, the code under `src/styles/` and the `/styleguide` page are the source of truth and you can proceed without them.
 2. **Run `pnpm dev` and visit `/styleguide`**. Everything that currently exists in the design system is visible there.
 3. **Check `git log --oneline --graph`** to see the commit history shape. Follow the same merge-commit-per-task pattern.
 4. **The user is learning as we go.** Explain decisions, tradeoffs, and gotchas as they arise. Do not jump ahead to implementation without agreement on the approach.
