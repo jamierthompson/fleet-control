@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
+import { AgentIdBlock } from "@/components/primitives/AgentIdBlock";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { FilterChip } from "@/components/primitives/FilterChip";
 import { FunctionKey } from "@/components/primitives/FunctionKey";
@@ -226,6 +227,7 @@ const typographyStyles: TypographyStyle[] = [
   { cls: "buttonSecondary", mdName: "button.secondary", sample: "approve" },
   { cls: "buttonTertiary", mdName: "button.tertiary", sample: "all" },
   { cls: "caption", mdName: "caption", sample: "14:22:07Z" },
+  { cls: "metaMd", mdName: "meta.md", sample: "vulnerability · production dependency scan" },
   { cls: "brandWordmark", mdName: "brand.wordmark", sample: "sentryos / fleet" },
 ];
 
@@ -547,6 +549,38 @@ export default function Styleguide() {
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Footer navigation. Key name in amber, label muted.
                 Active key gets amber fill with black text.
+              </span>
+            </div>
+          </div>
+
+          {/* AgentIdBlock — namespaced agent ID with description subtitle.
+              Used in card headers to identify the firing agent. */}
+          <div className={styles.primitiveCard}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "var(--space-16)",
+                padding: "var(--space-12)",
+              }}
+            >
+              <AgentIdBlock
+                name="vuln-scanner"
+                namespace="prod"
+                description="Vulnerability · production dependency scan"
+              />
+              <AgentIdBlock
+                name="threat-detector"
+                namespace="prod"
+                description="Threat correlation · behavioural analysis"
+              />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>AgentIdBlock</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Card header agent identifier. Name + muted namespace,
+                description subtitle below (metaMd typography).
               </span>
             </div>
           </div>

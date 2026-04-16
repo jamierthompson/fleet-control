@@ -23,7 +23,8 @@ A working reference that captures where the project is, the conventions being fo
 | 11| `KeyValueRow` primitive            | `feat/key-value-row-primitive` | #13 |
 | 12| `ConfidenceChip` primitive         | `feat/confidence-chip-primitive` | #14 |
 | 13| `FilterChip` primitive             | `feat/filter-chip-primitive`   | #15 |
-| 14| `FunctionKey` primitive            | `feat/function-key-primitive`  |     |
+| 14| `FunctionKey` primitive            | `feat/function-key-primitive`  | #16 |
+| 15| `AgentIdBlock` primitive + `metaMd` typography | `feat/agent-id-block-primitive` |     |
 
 What exists:
 
@@ -34,7 +35,7 @@ What exists:
 - **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
 - **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
-- **All eight Tier-1 primitives shipped**: `LivePulse`, `StatusPip`, `BlinkDot`, `Badge`, `KeyValueRow`, `ConfidenceChip`, `FilterChip`, and `FunctionKey`. Tier 1 is complete — next is Tier 2 (simple composed primitives).
+- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is underway: `AgentIdBlock` shipped.
 
 ---
 
@@ -172,7 +173,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 - **`KeyValueRow`** ✓ (#13) — one `<dt>`/`<dd>` pair styled as a labeled field. Label is uppercase, muted (`labelSm`); value is primary text (`bodySm`) accepting rich children (`<code>`, `<b>`). Renders a bare fragment — the grid layout belongs to the future `FieldGrid` parent.
 - **`FieldGrid`** — a vertical stack of `KeyValueRow`s sharing a grid.
 - **`Badge`** ✓ (#11) — shipped with three orthogonal props: `variant` (`crit` | `linked` | `nominal` | `stale`, omitted = muted), `appearance` (`filled` | `outlined`, default outlined), `size` (`sm` | `md`, default md). Consolidates what the inventory originally had as separate `Badge` and `StatusBadge`. Filled is only meaningful for crit and linked; other variants fall back to outlined. Consumers compose `<BlinkDot />` as a child for attention-grabbing states.
-- **`AgentIdBlock`** — namespaced agent ID (`vuln-scanner·prod`) + description line below. Used in card headers.
+- **`AgentIdBlock`** ✓ (#17) — namespaced agent ID (`vuln-scanner·prod`) + description subtitle. Name in `headingLg`, muted namespace suffix, description in new `metaMd` typography. Server Component.
 - **`CardMeta`** — right-aligned meta rows: `FIRED 03:42 · 39m AGO` + confidence tier.
 - **`ConfidenceChip`** ✓ (#14) — `CONF 94%` in one of three amber tiers: high (≥90%), standard (75–89%), below (<75%). Optional delta suffix (`↑ from 62%`). Tier is computed from the value, not passed as a prop.
 - **`CardHeader`** — composes Badge + AgentIdBlock + CardMeta. **[→ depends on: Badge, AgentIdBlock, CardMeta, ConfidenceChip]**
@@ -244,7 +245,7 @@ Each tier numbers independently — adding a primitive to one tier does not casc
 **Tier 2 — simple composed primitives.**
 
 1. `AgentRow` ← StatusPip, Badge
-2. `AgentIdBlock`
+2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
 3. `CardButton` — action row button variants (may need its own primitive or become part of CardActionRow)
 4. `BrandChip`, `UserChip`, `LiveClock`, `TopBarMeta` ← LivePulse
 5. `BreadcrumbPath`
