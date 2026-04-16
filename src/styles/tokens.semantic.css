@@ -30,11 +30,17 @@
   --surface-signal-linked: var(--color-signal-linked-bg);
   --surface-signal-stale: var(--color-signal-stale-bg);
 
+  /* "Loud" variants — saturated fills used by filled badges and any
+     other component that wants the unmuted form of the signal hue. */
+  --surface-signal-crit-loud: var(--color-signal-crit);
+  --surface-signal-linked-loud: var(--color-signal-linked);
+
   /* ─── border.* ─────────────────────────────────────────────────── */
 
   --border-subtle: var(--color-line-1);
   --border-default: var(--color-line-2);
   --border-strong: var(--color-line-hot);
+  --border-muted: var(--color-neutral-700);  /* Default outlined badge / "no signal" border */
   --border-signal-crit: var(--color-signal-crit-edge);
   --border-signal-linked: var(--color-signal-linked-edge);
   --border-signal-stale: var(--color-signal-stale);
