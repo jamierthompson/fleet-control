@@ -6,7 +6,7 @@ A working reference that captures where the project is, the conventions being fo
 
 ## Status
 
-**Design system foundation is complete and the first primitive has landed.** Tasks 1–7 below are all merged to `main`.
+**Design system foundation is complete and primitive work is underway.** See the table below for what has merged.
 
 | # | Task                               | Branch                          | PR  |
 | - | ---------------------------------- | ------------------------------- | --- |
