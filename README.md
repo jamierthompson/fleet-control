@@ -1,7 +1,9 @@
 # Fleet Control
 
 A terminal-inspired command surface for managing autonomous AI agents in security operations. A fleet of specialized agents runs continuously — scanning networks, triaging vulnerabilities, monitoring access, checking compliance. Some auto-patch. Some lock accounts. Some watch and wait. They never stop.
+
 The design problem isn't interaction — it's command. This isn't a dashboard that reports what happened in a time window. It's a queue of decisions that still need a human, with the context needed to act immediately.
+
 Bloomberg terminal aesthetic: amber-on-black phosphor, JetBrains Mono, dense gridded layout. Deliberately not another dark-mode cyber thing.
 
 ## Tech Stack
