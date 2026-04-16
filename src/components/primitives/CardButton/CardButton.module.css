@@ -1,0 +1,86 @@
+/* CardButton — action button in a card's bottom row.
+
+   Typography does NOT live here — the component composes
+   buttonPrimary on the button and chipSm on the key hint from
+   typography.module.css at render time. This file owns colour,
+   padding, borders, variant states, and the key hint pill. */
+
+/* ─── Base ─────────────────────────────────────────────────────────
+   Default variant: amber text on transparent background. The
+   border-left separator creates dividers between sibling buttons
+   in the action row. */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-10) var(--space-14);
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-left: var(--border-width-1) solid var(--border-default);
+  color: var(--action-default-text);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s;
+}
+
+/* First button in a row: no left border, left-aligned, slightly
+   more left padding. Typically a ghost variant that spans the
+   remaining space in the grid. */
+.base:first-child {
+  border-left: 0;
+  justify-content: flex-start;
+  padding-left: var(--space-16);
+}
+
+.base:hover {
+  color: var(--action-text-hover);
+  background: var(--action-bg-hover);
+}
+
+/* ─── Primary variant ──────────────────────────────────────────────
+   Amber fill with black text — the main positive action. */
+
+.primary {
+  background: var(--action-primary-bg);
+  color: var(--action-primary-text);
+}
+
+.primary:hover {
+  background: var(--action-primary-bg-hover);
+  color: var(--action-primary-text);
+}
+
+/* ─── Crit variant ─────────────────────────────────────────────────
+   Red fill with white text — destructive or high-severity action. */
+
+.crit {
+  background: var(--action-crit-bg);
+  color: var(--action-crit-text);
+}
+
+.crit:hover {
+  background: var(--action-crit-bg);
+  color: var(--action-crit-text);
+  filter: brightness(1.15);
+}
+
+/* ─── Ghost variant ────────────────────────────────────────────────
+   Muted text — secondary navigation links in the left slot. */
+
+.ghost {
+  color: var(--action-ghost-text);
+}
+
+/* ─── Key hint ─────────────────────────────────────────────────────
+   Small bordered pill showing a keyboard shortcut ("D", "↵").
+   Uses currentColor for the border so it adapts to the button
+   variant automatically. */
+
+.keyHint {
+  opacity: 0.7;
+  padding: 1px var(--space-4);
+  border: var(--border-width-1) solid currentColor;
+}

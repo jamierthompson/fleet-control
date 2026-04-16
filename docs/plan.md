@@ -24,7 +24,8 @@ A working reference that captures where the project is, the conventions being fo
 | 12| `ConfidenceChip` primitive         | `feat/confidence-chip-primitive` | #14 |
 | 13| `FilterChip` primitive             | `feat/filter-chip-primitive`   | #15 |
 | 14| `FunctionKey` primitive            | `feat/function-key-primitive`  | #16 |
-| 15| `AgentIdBlock` primitive + `metaMd` typography | `feat/agent-id-block-primitive` |     |
+| 15| `AgentIdBlock` primitive + `metaMd` typography | `feat/agent-id-block-primitive` | #17 |
+| 16| `CardButton` primitive             | `feat/card-button-primitive`   |     |
 
 What exists:
 
@@ -35,7 +36,7 @@ What exists:
 - **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
 - **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
-- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is underway: `AgentIdBlock` shipped.
+- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is underway: `AgentIdBlock` and `CardButton` shipped.
 
 ---
 
@@ -178,7 +179,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 - **`ConfidenceChip`** ✓ (#14) — `CONF 94%` in one of three amber tiers: high (≥90%), standard (75–89%), below (<75%). Optional delta suffix (`↑ from 62%`). Tier is computed from the value, not passed as a prop.
 - **`CardHeader`** — composes Badge + AgentIdBlock + CardMeta. **[→ depends on: Badge, AgentIdBlock, CardMeta, ConfidenceChip]**
 - **`CardActionRow`** — the button row at the bottom. Hosts secondary, ghost, primary, and crit variants.
-- **`CardButton`** — a single button in the action row. Variants: `primary`, `crit`, `ghost`, `default`. May include a keyboard key hint (`D`, `↵`).
+- **`CardButton`** ✓ (#19) — a single button in the action row. Variants: `primary` (amber fill), `crit` (red fill), `ghost` (muted), default (amber text). Optional `keyHint` prop renders a bordered pill. Client Component.
 - **`Card`** — the full card. Variants drive the left-accent strip: `crit` (red), `linked` (dark, used inside incident group), `stale` (gray). **[→ depends on: CardHeader, FieldGrid, KeyValueRow, CardActionRow]**
 
 ### 7. Incident group
@@ -246,7 +247,7 @@ Each tier numbers independently — adding a primitive to one tier does not casc
 
 1. `AgentRow` ← StatusPip, Badge
 2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
-3. `CardButton` — action row button variants (may need its own primitive or become part of CardActionRow)
+3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
 4. `BrandChip`, `UserChip`, `LiveClock`, `TopBarMeta` ← LivePulse
 5. `BreadcrumbPath`
 6. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
