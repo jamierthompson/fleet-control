@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
+import { KeyValueRow } from "@/components/primitives/KeyValueRow";
 import { LivePulse } from "@/components/primitives/LivePulse";
 import { StatusPip } from "@/components/primitives/StatusPip";
 import typo from "@/styles/typography.module.css";
@@ -407,6 +408,42 @@ export default function Styleguide() {
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Inherits currentColor. Composed inside Badge for NOW · CRIT
                 and PROPOSED states.
+              </span>
+            </div>
+          </div>
+
+          {/* KeyValueRow — one label/value pair for card body field grids.
+              Renders a bare <dt>/<dd> fragment, so we wrap in a <dl> with
+              an inline grid matching the mockup's 92px / 1fr layout. The
+              demo shows plain text, <code>, and <b> descendants. */}
+          <div className={styles.primitiveCard}>
+            <dl
+              className={styles.primitiveDemo}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "92px 1fr",
+                gap: "6px 16px",
+                alignItems: "baseline",
+                justifyContent: "start",
+                minHeight: "auto",
+                padding: "var(--space-12)",
+              }}
+            >
+              <KeyValueRow label="Finding">
+                Critical <code>CVE-2025-48719</code> in <b>libgrpc-rs 1.42.0</b>
+              </KeyValueRow>
+              <KeyValueRow label="Auto-action">
+                Patched <b>staging</b> at 03:43 — within authority
+              </KeyValueRow>
+              <KeyValueRow label="Authority">
+                <code>vuln.patch:staging</code> ✓ · <code>vuln.patch:prod</code> ✗
+              </KeyValueRow>
+            </dl>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>KeyValueRow</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Card body field row. Label as &lt;dt&gt; (labelSm), value as
+                &lt;dd&gt; (bodySm). Supports &lt;code&gt; and &lt;b&gt; in values.
               </span>
             </div>
           </div>
