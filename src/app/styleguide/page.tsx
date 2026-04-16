@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { AgentIdBlock } from "@/components/primitives/AgentIdBlock";
+import { AgentRow } from "@/components/primitives/AgentRow";
 import { CardButton } from "@/components/primitives/CardButton";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { FilterChip } from "@/components/primitives/FilterChip";
@@ -362,6 +363,22 @@ export default function Styleguide() {
             </div>
           </div>
 
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo}>
+              <StatusPip shape="circle" variant="crit" />
+              <StatusPip shape="circle" variant="linked" />
+              <StatusPip shape="circle" variant="nominal" />
+              <StatusPip shape="circle" variant="stale" />
+              <StatusPip shape="circle" />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>StatusPip · circle</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Rounded shape for roster agent rows.
+              </span>
+            </div>
+          </div>
+
           {/* Badge — uppercase status chip, the most-reused primitive
               in the system. Two appearances (filled, outlined), four
               signal variants + muted default, two sizes, composes
@@ -584,6 +601,59 @@ export default function Styleguide() {
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Card header agent identifier. Name + muted namespace,
                 description subtitle below (metaMd typography).
+              </span>
+            </div>
+          </div>
+
+          {/* AgentRow — roster agent row composing StatusPip (circle)
+              + agent name + Badge. Shows all variants. */}
+          <div className={styles.primitiveCard}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                flexDirection: "column",
+                alignItems: "stretch",
+                padding: 0,
+                minHeight: "auto",
+              }}
+            >
+              <AgentRow
+                variant="crit"
+                name="vuln-scanner"
+                namespace="prod"
+                status="CRIT"
+                statusVariant="crit"
+              />
+              <AgentRow
+                variant="linked"
+                name="access-monitor"
+                status="LOCK"
+                statusVariant="linked"
+              />
+              <AgentRow
+                name="vuln-scanner"
+                namespace="staging"
+                status="NOM"
+                statusVariant="nominal"
+              />
+              <AgentRow
+                variant="stale"
+                name="patch-manager"
+                namespace="prod"
+                status="STALE"
+                statusVariant="stale"
+              />
+              <AgentRow
+                name="threat-network"
+                status="NOM"
+                statusVariant="nominal"
+              />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>AgentRow</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Roster row: circle pip + agent name + badge. Crit, linked,
+                stale, and default variants.
               </span>
             </div>
           </div>
