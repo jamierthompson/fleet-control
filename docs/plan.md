@@ -6,7 +6,7 @@ A working reference that captures where the project is, the conventions being fo
 
 ## Status
 
-**Design system foundation is complete and the first primitive has landed.** Tasks 1–7 below are all merged to `main`.
+**Design system foundation is complete and primitive work is underway.** See the table below for what has merged.
 
 | # | Task                               | Branch                          | PR  |
 | - | ---------------------------------- | ------------------------------- | --- |
@@ -19,6 +19,7 @@ A working reference that captures where the project is, the conventions being fo
 | 7 | `LivePulse` primitive              | `feat/live-pulse-primitive`    | #7  |
 | 8 | `StatusPip` primitive              | `feat/status-pip-primitive`    | #9  |
 | 9 | `BlinkDot` primitive               | `feat/blink-dot-primitive`     | #10 |
+| 10| `Badge` primitive                  | `feat/badge-primitive`         | #11 |
 
 What exists:
 
