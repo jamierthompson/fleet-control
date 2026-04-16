@@ -22,7 +22,8 @@ A working reference that captures where the project is, the conventions being fo
 | 10| `Badge` primitive                  | `feat/badge-primitive`         | #11 |
 | 11| `KeyValueRow` primitive            | `feat/key-value-row-primitive` | #13 |
 | 12| `ConfidenceChip` primitive         | `feat/confidence-chip-primitive` | #14 |
-| 13| `FilterChip` primitive             | `feat/filter-chip-primitive`   |     |
+| 13| `FilterChip` primitive             | `feat/filter-chip-primitive`   | #15 |
+| 14| `FunctionKey` primitive            | `feat/function-key-primitive`  |     |
 
 What exists:
 
@@ -33,7 +34,7 @@ What exists:
 - **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
 - **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
-- **Seven Tier-1 primitives shipped**: `LivePulse`, `StatusPip`, `BlinkDot`, `Badge`, `KeyValueRow`, `ConfidenceChip`, and `FilterChip`. The next primitive in the Tier-1 list is `FunctionKey`.
+- **All eight Tier-1 primitives shipped**: `LivePulse`, `StatusPip`, `BlinkDot`, `Badge`, `KeyValueRow`, `ConfidenceChip`, `FilterChip`, and `FunctionKey`. Tier 1 is complete — next is Tier 2 (simple composed primitives).
 
 ---
 
@@ -211,7 +212,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 *Function-key row at the bottom: F1 NOW, F2 ROSTER, ... + right-side stream status.*
 
-- **`FunctionKey`** — one key: bold key name + function. Has an active state. Click-to-activate behavior in the mockup is client-side.
+- **`FunctionKey`** ✓ (#16) — one key: bold key name in amber + muted function label. Active state: amber fill, black text. Client Component with `aria-pressed` and `onClick`.
 - **`FunctionKeyRow`** — the full row of `FunctionKey`s.
 - **`Footer`** — composes `FunctionKeyRow` + `LivePulse` + stream status. **[→ depends on: FunctionKey, LivePulse]**
 
@@ -236,7 +237,7 @@ The principle: **build leaves before branches**. A primitive that composes anoth
 5. ✓ `KeyValueRow` — shipped as a bare `<dt>`/`<dd>` fragment (no wrapper). Label uses `labelSm` typography (uppercase, muted), value uses `bodySm` (primary text). Values accept rich children (`<code>`, `<b>`). Designed to sit inside a future `FieldGrid` `<dl>` that owns the grid layout.
 6. ✓ `ConfidenceChip` — inline `CONF N%` chip with tier-driven colouring: high (≥90%, bright amber), standard (75–89%, amber), below (<75%, dim amber). Optional delta suffix shows change from a previous value (`↑ from 62%`). Uses `labelMd` for the label, `labelLg` for the value, `caption` for the delta — no custom font declarations in the CSS Module.
 7. ✓ `FilterChip` — roster filter toggle button. Active state: amber fill, black text. Inactive: muted, transparent. Count at reduced opacity when inactive. Client Component (onClick). `aria-pressed` for accessibility. Right border between siblings removed on `:last-child`.
-8. `FunctionKey` — footer function-key button. **Next up.**
+8. ✓ `FunctionKey` — footer navigation button with two-part label: key name ("F1") in amber + function label ("NOW") in muted text. Active state: amber fill, all text black. Client Component with `aria-pressed`. Right border between siblings. Uses `labelMd` throughout — key name gets a colour class only.
 
 Each tier numbers independently — adding a primitive to one tier does not cascade renumbering through the rest.
 

@@ -6,6 +6,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { FilterChip } from "@/components/primitives/FilterChip";
+import { FunctionKey } from "@/components/primitives/FunctionKey";
 import { KeyValueRow } from "@/components/primitives/KeyValueRow";
 import { LivePulse } from "@/components/primitives/LivePulse";
 import { StatusPip } from "@/components/primitives/StatusPip";
@@ -522,6 +523,43 @@ export default function Styleguide() {
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Roster filter toggle. Active (amber fill) vs inactive (muted).
                 Count at reduced opacity when inactive.
+              </span>
+            </div>
+          </div>
+
+          {/* FunctionKey — footer navigation buttons. The row wrapper
+              simulates the 26px footer bar height so the keys look
+              realistic. */}
+          <div className={styles.primitiveCard}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                padding: "var(--space-12)",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "var(--space-10)",
+              }}
+            >
+              {/* Active state — "F1 NOW" is the current screen */}
+              <div
+                style={{
+                  display: "flex",
+                  height: "26px",
+                  background: "var(--surface-bar-fill)",
+                  border: "var(--border-width-1) solid var(--border-subtle)",
+                }}
+              >
+                <FunctionKey keyName="F1" label="NOW" active />
+                <FunctionKey keyName="F2" label="ROSTER" />
+                <FunctionKey keyName="F3" label="LOG" />
+                <FunctionKey keyName="/" label="CMD" />
+              </div>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>FunctionKey</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Footer navigation. Key name in amber, label muted.
+                Active key gets amber fill with black text.
               </span>
             </div>
           </div>

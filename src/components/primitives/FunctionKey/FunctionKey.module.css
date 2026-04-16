@@ -1,0 +1,54 @@
+/* FunctionKey — footer navigation button.
+
+   Typography (font-size, weight, tracking, case) does NOT live here
+   — the component composes labelMd from typography.module.css at
+   render time. This file owns colour, padding, borders, and the
+   active/hover states. */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-12);
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-right: var(--border-width-1) solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s;
+}
+
+.base:last-child {
+  border-right: 0;
+}
+
+.base:hover {
+  color: var(--text-primary);
+  background: var(--surface-panel-raised);
+}
+
+/* ─── Key name ─────────────────────────────────────────────────────
+   The "F1", "F2", "/" identifier. Amber in the inactive state,
+   goes black with the rest of the text when active. */
+
+.key {
+  color: var(--text-brand);
+}
+
+/* ─── Active state ─────────────────────────────────────────────────
+   Amber fill with black text — the currently selected screen. */
+
+.active {
+  background: var(--surface-brand-fill);
+  color: var(--text-on-brand);
+}
+
+.active .key {
+  color: var(--text-on-brand);
+}
+
+.active:hover {
+  color: var(--text-on-brand);
+  background: var(--surface-brand-fill);
+}
