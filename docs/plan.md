@@ -19,6 +19,7 @@ A working reference that captures where the project is, the conventions being fo
 | 7 | `LivePulse` primitive              | `feat/live-pulse-primitive`    | #7  |
 | 8 | `StatusPip` primitive              | `feat/status-pip-primitive`    | #9  |
 | 9 | `BlinkDot` primitive               | `feat/blink-dot-primitive`     | #10 |
+| 10| `Badge` primitive                  | `feat/badge-primitive`         | TBD |
 
 What exists:
 

@@ -2,6 +2,7 @@ import { Fragment } from "react";
 
 import type { Metadata } from "next";
 
+import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { LivePulse } from "@/components/primitives/LivePulse";
 import { StatusPip } from "@/components/primitives/StatusPip";
@@ -348,6 +349,42 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>StatusPip · sm</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Larger 8px size used in the posture pill.
+              </span>
+            </div>
+          </div>
+
+          {/* Badge — uppercase status chip, the most-reused primitive
+              in the system. Two appearances (filled, outlined), four
+              signal variants + muted default, two sizes, composes
+              BlinkDot as a child for attention-grabbing states. */}
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo} style={{ flexWrap: "wrap" }}>
+              <Badge variant="crit" appearance="filled">
+                <BlinkDot />NOW · CRIT
+              </Badge>
+              <Badge variant="linked" appearance="filled">LINKED · LOCK</Badge>
+              <Badge variant="stale">STALE · FLEET HEALTH</Badge>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>Badge · md (card headers)</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Filled crit + BlinkDot, filled linked, outlined stale.
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo} style={{ flexWrap: "wrap" }}>
+              <Badge variant="crit" size="sm">CRIT</Badge>
+              <Badge variant="linked" size="sm">LINK</Badge>
+              <Badge variant="nominal" size="sm">NOM</Badge>
+              <Badge variant="stale" size="sm">STALE</Badge>
+              <Badge size="sm">MUTED</Badge>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>Badge · sm (summary, roster)</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Outlined variants — crit, linked, nominal, stale, and the muted default.
               </span>
             </div>
           </div>

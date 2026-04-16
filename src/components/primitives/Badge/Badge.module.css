@@ -1,0 +1,76 @@
+/* Badge — uppercase status chip used in card headers, summary cells,
+   the roster, and the posture strip. Two appearances (filled and
+   outlined), four signal variants plus a muted default, two sizes.
+
+   Typography (font-size, weight, tracking) does NOT live in this
+   file — the component composes labelSm or labelXs from
+   typography.module.css at render time, per the project rule that
+   typography is always applied as a composite class. This file
+   only owns the badge's geometry and colour. */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  white-space: nowrap;
+
+  /* Default (muted / no-signal) outlined treatment. Variant classes
+     below override colour and border-colour without touching the
+     geometry. */
+  color: var(--text-tertiary);
+  background: transparent;
+  border: var(--border-width-1) solid var(--border-muted);
+}
+
+/* ─── Sizes ───────────────────────────────────────────────────────
+   Only padding lives here — font-size comes from the composed
+   typography class. The two sizes pair like this:
+     md → labelSm (9.5px)  + 3px 8px padding
+     sm → labelXs (9px)    + 2px 6px padding */
+
+.md {
+  padding: var(--space-2) var(--space-8);
+}
+
+.sm {
+  padding: var(--space-2) var(--space-6);
+}
+
+/* ─── Outlined variants ─────────────────────────────────────────── */
+
+.crit {
+  color: var(--text-signal-crit);
+  border-color: var(--border-signal-crit);
+}
+
+.linked {
+  color: var(--text-signal-linked);
+  border-color: var(--border-signal-linked);
+}
+
+.nominal {
+  color: var(--text-signal-nominal);
+  border-color: var(--border-signal-nominal);
+}
+
+.stale {
+  color: var(--text-signal-stale);
+  border-color: var(--border-signal-stale);
+}
+
+/* ─── Filled appearance ─────────────────────────────────────────────
+   Only meaningful for crit and linked (the only filled treatments
+   in the mockups). Other variants paired with appearance="filled"
+   silently fall back to the outlined treatment defined above. */
+
+.filled.crit {
+  color: var(--text-on-crit);
+  background: var(--surface-signal-crit-loud);
+  border-color: transparent;
+}
+
+.filled.linked {
+  color: var(--text-on-linked);
+  background: var(--surface-signal-linked-loud);
+  border-color: transparent;
+}
