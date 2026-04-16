@@ -20,7 +20,8 @@ A working reference that captures where the project is, the conventions being fo
 | 8 | `StatusPip` primitive              | `feat/status-pip-primitive`    | #9  |
 | 9 | `BlinkDot` primitive               | `feat/blink-dot-primitive`     | #10 |
 | 10| `Badge` primitive                  | `feat/badge-primitive`         | #11 |
-| 11| `KeyValueRow` primitive            | `feat/key-value-row-primitive` |     |
+| 11| `KeyValueRow` primitive            | `feat/key-value-row-primitive` | #13 |
+| 12| `ConfidenceChip` primitive         | `feat/confidence-chip-primitive` |     |
 
 What exists:
 
@@ -31,7 +32,7 @@ What exists:
 - **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
 - **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
-- **Five Tier-1 primitives shipped**: `LivePulse`, `StatusPip`, `BlinkDot`, `Badge`, and `KeyValueRow`. The next primitive in the Tier-1 list is `ConfidenceChip`.
+- **Six Tier-1 primitives shipped**: `LivePulse`, `StatusPip`, `BlinkDot`, `Badge`, `KeyValueRow`, and `ConfidenceChip`. The next primitive in the Tier-1 list is `FilterChip`.
 
 ---
 
@@ -171,7 +172,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 - **`Badge`** ✓ (#11) — shipped with three orthogonal props: `variant` (`crit` | `linked` | `nominal` | `stale`, omitted = muted), `appearance` (`filled` | `outlined`, default outlined), `size` (`sm` | `md`, default md). Consolidates what the inventory originally had as separate `Badge` and `StatusBadge`. Filled is only meaningful for crit and linked; other variants fall back to outlined. Consumers compose `<BlinkDot />` as a child for attention-grabbing states.
 - **`AgentIdBlock`** — namespaced agent ID (`vuln-scanner·prod`) + description line below. Used in card headers.
 - **`CardMeta`** — right-aligned meta rows: `FIRED 03:42 · 39m AGO` + confidence tier.
-- **`ConfidenceChip`** — `CONF 94%` in one of three amber tiers (below/standard/high) plus delta variants. Own primitive because of the tier logic.
+- **`ConfidenceChip`** ✓ (#14) — `CONF 94%` in one of three amber tiers: high (≥90%), standard (75–89%), below (<75%). Optional delta suffix (`↑ from 62%`). Tier is computed from the value, not passed as a prop.
 - **`CardHeader`** — composes Badge + AgentIdBlock + CardMeta. **[→ depends on: Badge, AgentIdBlock, CardMeta, ConfidenceChip]**
 - **`CardActionRow`** — the button row at the bottom. Hosts secondary, ghost, primary, and crit variants.
 - **`CardButton`** — a single button in the action row. Variants: `primary`, `crit`, `ghost`, `default`. May include a keyboard key hint (`D`, `↵`).
@@ -232,8 +233,8 @@ The principle: **build leaves before branches**. A primitive that composes anoth
 3. ✓ `BlinkDot` (#10) — discovered during Badge design; composed inside Badge
 4. ✓ `Badge` (#11) — consolidated `Badge` + `StatusBadge`
 5. ✓ `KeyValueRow` — shipped as a bare `<dt>`/`<dd>` fragment (no wrapper). Label uses `labelSm` typography (uppercase, muted), value uses `bodySm` (primary text). Values accept rich children (`<code>`, `<b>`). Designed to sit inside a future `FieldGrid` `<dl>` that owns the grid layout.
-6. `ConfidenceChip` — own primitive because of tier logic. **Next up.**
-7. `FilterChip` — roster filter pill
+6. ✓ `ConfidenceChip` — inline `CONF N%` chip with tier-driven colouring: high (≥90%, bright amber), standard (75–89%, amber), below (<75%, dim amber). Optional delta suffix shows change from a previous value (`↑ from 62%`). Uses `labelMd` for the label, `labelLg` for the value, `caption` for the delta — no custom font declarations in the CSS Module.
+7. `FilterChip` — roster filter pill. **Next up.**
 8. `FunctionKey` — footer function-key button
 
 Each tier numbers independently — adding a primitive to one tier does not cascade renumbering through the rest.

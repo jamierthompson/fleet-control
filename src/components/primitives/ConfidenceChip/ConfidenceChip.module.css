@@ -1,0 +1,40 @@
+/* ConfidenceChip — inline confidence percentage with tier colouring.
+
+   Typography (font-size, weight, tracking, case) does NOT live here
+   — the component composes labelMd on the container, labelLg on the
+   value, and caption on the delta from typography.module.css at
+   render time. This file only owns colour and layout. */
+
+.base {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-6);
+  color: var(--text-secondary);
+}
+
+/* ─── Value — the percentage number ────────────────────────────────
+   Coloured by tier. The three tiers map to the confidence ramp in
+   tokens.semantic.css — reskin by changing the primitive values. */
+
+.value {
+  /* Fallback to standard tier if somehow no tier class is applied */
+  color: var(--text-confidence-standard);
+}
+
+.high {
+  color: var(--text-confidence-high);
+}
+
+.standard {
+  color: var(--text-confidence-standard);
+}
+
+.below {
+  color: var(--text-confidence-below);
+}
+
+/* ─── Delta — "↑ from 62%" suffix ──────────────────────────────── */
+
+.delta {
+  color: var(--text-secondary);
+}
