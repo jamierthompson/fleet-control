@@ -489,7 +489,7 @@ export default function Styleguide() {
                 gap: "var(--space-10)",
               }}
             >
-              {/* Active state — simulates the "ALL" filter selected.
+              {/* Simulates the roster filter bar with "ALL" selected.
                   Max-width matches the 308px roster panel so the chips
                   look realistic at the flex: 1 sizing they use in situ. */}
               <div
@@ -500,19 +500,6 @@ export default function Styleguide() {
                 }}
               >
                 <FilterChip label="ALL" count={24} active />
-                <FilterChip label="DEMAND" count={2} />
-                <FilterChip label="LINKED" count={2} />
-                <FilterChip label="STALE" count={1} />
-              </div>
-              {/* Inactive state — no filter selected */}
-              <div
-                style={{
-                  display: "flex",
-                  maxWidth: "308px",
-                  border: "var(--border-width-1) solid var(--border-default)",
-                }}
-              >
-                <FilterChip label="ALL" count={24} />
                 <FilterChip label="DEMAND" count={2} />
                 <FilterChip label="LINKED" count={2} />
                 <FilterChip label="STALE" count={1} />
