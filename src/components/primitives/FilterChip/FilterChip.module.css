@@ -1,0 +1,52 @@
+/* FilterChip — toggle button for the roster filter bar.
+
+   Typography (font-size, weight, tracking, case) does NOT live here
+   — the component composes labelSm from typography.module.css at
+   render time. This file owns colour, padding, borders, and the
+   active/hover states. */
+
+.base {
+  flex: 1;
+  padding: var(--space-4) var(--space-4);
+  background: transparent;
+  border: none;
+  border-right: var(--border-width-1) solid var(--border-default);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.12s;
+}
+
+/* Remove the right border on the last chip in a row — the parent
+   container owns the outer border, not the individual chips. */
+.base:last-child {
+  border-right: 0;
+}
+
+.base:hover {
+  color: var(--text-brand);
+}
+
+/* ─── Active state ─────────────────────────────────────────────────
+   Amber fill with black text — the selected filter. */
+
+.active {
+  background: var(--surface-brand-fill);
+  color: var(--text-on-brand);
+}
+
+.active:hover {
+  color: var(--text-on-brand);
+}
+
+/* ─── Count ────────────────────────────────────────────────────────
+   The number beside the label. Reduced opacity in the inactive
+   state for visual hierarchy; full opacity when active. */
+
+.count {
+  opacity: 0.65;
+  margin-left: 3px;
+}
+
+.active .count {
+  opacity: 1;
+}
