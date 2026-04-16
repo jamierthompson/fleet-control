@@ -1,0 +1,70 @@
+/* AgentRow — one agent row in the fleet roster.
+
+   Typography does NOT live here — the component composes idAgent
+   on the agent name from typography.module.css, and delegates the
+   status badge to the Badge primitive. This file owns the grid
+   layout, variant-driven background tints, left accent borders,
+   and text colour overrides. */
+
+.base {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-14) var(--space-4) var(--space-28);
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.base:hover {
+  background: var(--surface-panel-raised);
+}
+
+/* ─── Agent name ───────────────────────────────────────────────────
+   Primary text, with the namespace suffix muted. */
+
+.name {
+  color: var(--text-primary);
+}
+
+.namespace {
+  color: var(--text-secondary);
+}
+
+/* ─── Signal variants ──────────────────────────────────────────────
+   Each adds a tinted background, a left accent border in the signal
+   colour, and shifts the name/namespace text to variant-specific
+   tints defined in the semantic token layer. */
+
+.crit {
+  background: var(--surface-signal-crit);
+  border-left-color: var(--text-signal-crit);
+}
+
+.crit .name {
+  color: var(--text-on-crit-row);
+}
+
+.linked {
+  background: var(--surface-signal-linked);
+  border-left-color: var(--text-signal-linked);
+}
+
+.linked .name {
+  color: var(--text-on-linked-row);
+}
+
+.stale {
+  background: var(--surface-signal-stale);
+  border-left-color: var(--text-signal-stale);
+}
+
+.stale .name {
+  color: var(--text-signal-stale);
+}
+
+.stale .namespace {
+  color: var(--text-signal-stale);
+  opacity: 0.6;
+}

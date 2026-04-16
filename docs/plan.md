@@ -25,7 +25,8 @@ A working reference that captures where the project is, the conventions being fo
 | 13| `FilterChip` primitive             | `feat/filter-chip-primitive`   | #15 |
 | 14| `FunctionKey` primitive            | `feat/function-key-primitive`  | #16 |
 | 15| `AgentIdBlock` primitive + `metaMd` typography | `feat/agent-id-block-primitive` | #17 |
-| 16| `CardButton` primitive             | `feat/card-button-primitive`   |     |
+| 16| `CardButton` primitive             | `feat/card-button-primitive`   | #19 |
+| 17| `AgentRow` primitive + StatusPip shape | `feat/agent-row-primitive`  |     |
 
 What exists:
 
@@ -36,7 +37,7 @@ What exists:
 - **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
 - **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
-- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is underway: `AgentIdBlock` and `CardButton` shipped.
+- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is underway: `AgentRow`, `AgentIdBlock`, and `CardButton` shipped.
 
 ---
 
@@ -144,7 +145,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 - **`FilterChip`** ✓ (#15) — the `ALL 24`, `DEMAND 2`, `LINKED 2`, `STALE 1` toggle buttons. Active chip gets amber fill with black text; inactive chips are muted. Client Component with `aria-pressed` for accessibility.
 - **`RosterHeader`** — "FLEET ROSTER · 7 CLASSES" + "24 AGENTS" + filter chips row.
 - **`StatusPip`** ✓ (#9) — shipped as a flat colored 6px/8px square (xs/sm sizes) with variants `crit` | `linked` | `nominal` | `stale`, or the muted gray default when no variant is passed. Consolidated with `PostureBlob`. Crit and linked wear a phosphor halo; nominal and stale are flat. The originally-speculated "stale gray ring" is not how it shipped — stale is just a flat gray square like the others.
-- **`AgentRow`** — one agent: pip + namespaced ID (`vuln-scanner·prod`) + status badge. **[→ depends on: StatusPip, Badge]**
+- **`AgentRow`** ✓ (#20) — one agent: circle StatusPip + namespaced ID (`vuln-scanner·prod`) + sm Badge. Variant-driven background tints and left accent borders. Server Component. **[→ depends on: StatusPip, Badge]**
 - **`ClassHeader`** — collapsible group header: caret + class name + count + aggregate pip. Click to collapse.
 - **`ClassGroup`** — `ClassHeader` + list of `AgentRow`s. **[→ depends on: ClassHeader, AgentRow]**
 - **`Roster`** — the whole left rail. **[→ depends on: RosterHeader, ClassGroup]**
@@ -245,7 +246,7 @@ Each tier numbers independently — adding a primitive to one tier does not casc
 
 **Tier 2 — simple composed primitives.**
 
-1. `AgentRow` ← StatusPip, Badge
+1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text colour shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
 2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
 3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
 4. `BrandChip`, `UserChip`, `LiveClock`, `TopBarMeta` ← LivePulse
