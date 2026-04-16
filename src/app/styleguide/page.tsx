@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
+import { FilterChip } from "@/components/primitives/FilterChip";
 import { KeyValueRow } from "@/components/primitives/KeyValueRow";
 import { LivePulse } from "@/components/primitives/LivePulse";
 import { StatusPip } from "@/components/primitives/StatusPip";
@@ -470,6 +471,57 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>ConfidenceChip</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 High (≥90%), standard (75–89%), below (&lt;75%), and delta variant.
+              </span>
+            </div>
+          </div>
+
+          {/* FilterChip — roster filter toggle buttons. The outer
+              border and flex layout belong to the parent container;
+              FilterChip adds a right border between siblings. */}
+          <div className={styles.primitiveCard}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                padding: "var(--space-12)",
+                flexDirection: "column",
+                alignItems: "stretch",
+                gap: "var(--space-10)",
+              }}
+            >
+              {/* Active state — simulates the "ALL" filter selected.
+                  Max-width matches the 308px roster panel so the chips
+                  look realistic at the flex: 1 sizing they use in situ. */}
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "308px",
+                  border: "var(--border-width-1) solid var(--border-default)",
+                }}
+              >
+                <FilterChip label="ALL" count={24} active />
+                <FilterChip label="DEMAND" count={2} />
+                <FilterChip label="LINKED" count={2} />
+                <FilterChip label="STALE" count={1} />
+              </div>
+              {/* Inactive state — no filter selected */}
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "308px",
+                  border: "var(--border-width-1) solid var(--border-default)",
+                }}
+              >
+                <FilterChip label="ALL" count={24} />
+                <FilterChip label="DEMAND" count={2} />
+                <FilterChip label="LINKED" count={2} />
+                <FilterChip label="STALE" count={1} />
+              </div>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>FilterChip</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Roster filter toggle. Active (amber fill) vs inactive (muted).
+                Count at reduced opacity when inactive.
               </span>
             </div>
           </div>
