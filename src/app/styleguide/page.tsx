@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { AgentIdBlock } from "@/components/primitives/AgentIdBlock";
+import { CardButton } from "@/components/primitives/CardButton";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { FilterChip } from "@/components/primitives/FilterChip";
 import { FunctionKey } from "@/components/primitives/FunctionKey";
@@ -583,6 +584,48 @@ export default function Styleguide() {
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Card header agent identifier. Name + muted namespace,
                 description subtitle below (metaMd typography).
+              </span>
+            </div>
+          </div>
+
+          {/* CardButton — card action row buttons. The wrapper simulates
+              the card action row grid (1fr auto auto) with a top border.
+              Spans full grid width so the action row text doesn't wrap. */}
+          <div className={styles.primitiveCard} style={{ gridColumn: "1 / -1" }}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr auto auto",
+                alignItems: "stretch",
+                padding: 0,
+                minHeight: "auto",
+                borderTop: "var(--border-width-1) solid var(--border-default)",
+              }}
+            >
+              <CardButton variant="ghost">DETAIL · DIFF · BLAST RADIUS</CardButton>
+              <CardButton keyHint="D">DEFER 30M</CardButton>
+              <CardButton variant="crit" keyHint="↵">APPROVE PROD DEPLOY</CardButton>
+            </div>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr auto auto",
+                alignItems: "stretch",
+                padding: 0,
+                minHeight: "auto",
+                borderTop: "var(--border-width-1) solid var(--border-default)",
+              }}
+            >
+              <CardButton variant="ghost">INVESTIGATE</CardButton>
+              <CardButton>RELEASE</CardButton>
+              <CardButton variant="primary" keyHint="↵">CONFIRM LOCKOUT</CardButton>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>CardButton</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Ghost, default, crit, and primary variants. Optional key hint pill.
               </span>
             </div>
           </div>
