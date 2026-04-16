@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
+import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { KeyValueRow } from "@/components/primitives/KeyValueRow";
 import { LivePulse } from "@/components/primitives/LivePulse";
 import { StatusPip } from "@/components/primitives/StatusPip";
@@ -444,6 +445,31 @@ export default function Styleguide() {
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Card body field row. Label as &lt;dt&gt; (labelSm), value as
                 &lt;dd&gt; (bodySm). Supports &lt;code&gt; and &lt;b&gt; in values.
+              </span>
+            </div>
+          </div>
+
+          {/* ConfidenceChip — inline confidence percentage with tier
+              colouring. Shows all three tiers and the delta variant. */}
+          <div className={styles.primitiveCard}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "var(--space-10)",
+                padding: "var(--space-12)",
+              }}
+            >
+              <ConfidenceChip value={94} />
+              <ConfidenceChip value={87} />
+              <ConfidenceChip value={62} />
+              <ConfidenceChip value={87} previousValue={62} />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>ConfidenceChip</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                High (≥90%), standard (75–89%), below (&lt;75%), and delta variant.
               </span>
             </div>
           </div>
