@@ -199,6 +199,29 @@
   letter-spacing: var(--font-tracking-label-wide);
 }
 
+/* ─── chip.* — compact interactive toggle text ───────────────────────
+   Tighter tracking than label.* because these are short, interactive
+   elements (filter chips, function keys) where the wide caps tracking
+   (0.14em) makes the text look too spread out. The 0.08em value
+   (--font-tracking-label-wide) matches the mockup's topbar/status
+   meta tracking — compact but still readable. */
+
+.chipMd {
+  composes: upper;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-label-wide);
+}
+
+.chipSm {
+  composes: upper;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-flat);
+  letter-spacing: var(--font-tracking-label-wide);
+}
+
 /* ─── caption — event timestamps under glyphs ─────────────────────── */
 
 .caption {

@@ -1,14 +1,14 @@
 /* FunctionKey — footer navigation button.
 
    Typography (font-size, weight, tracking, case) does NOT live here
-   — the component composes labelMd from typography.module.css at
+   — the component composes chipMd from typography.module.css at
    render time. This file owns colour, padding, borders, and the
    active/hover states. */
 
 .base {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-6);
   padding: 0 var(--space-12);
   height: 100%;
   background: transparent;
@@ -34,6 +34,7 @@
 
 .key {
   color: var(--text-brand);
+  font-weight: var(--font-weight-bold);
 }
 
 /* ─── Active state ─────────────────────────────────────────────────

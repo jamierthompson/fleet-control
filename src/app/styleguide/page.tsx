@@ -226,6 +226,8 @@ const typographyStyles: TypographyStyle[] = [
   { cls: "buttonPrimary", mdName: "button.primary", sample: "hold" },
   { cls: "buttonSecondary", mdName: "button.secondary", sample: "approve" },
   { cls: "buttonTertiary", mdName: "button.tertiary", sample: "all" },
+  { cls: "chipMd", mdName: "chip.md", sample: "f1 now" },
+  { cls: "chipSm", mdName: "chip.sm", sample: "all 24" },
   { cls: "caption", mdName: "caption", sample: "14:22:07Z" },
   { cls: "metaMd", mdName: "meta.md", sample: "vulnerability · production dependency scan" },
   { cls: "brandWordmark", mdName: "brand.wordmark", sample: "sentryos / fleet" },

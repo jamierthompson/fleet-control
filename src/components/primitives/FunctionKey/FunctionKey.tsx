@@ -34,7 +34,7 @@ export function FunctionKey({
   active = false,
   onClick,
 }: FunctionKeyProps) {
-  const className = [styles.base, active && styles.active, typo.labelMd]
+  const className = [styles.base, active && styles.active, typo.chipMd]
     .filter(Boolean)
     .join(" ");
 

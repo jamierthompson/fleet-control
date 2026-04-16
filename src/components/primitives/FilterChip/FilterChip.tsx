@@ -38,7 +38,7 @@ export function FilterChip({
   active = false,
   onClick,
 }: FilterChipProps) {
-  const className = [styles.base, active && styles.active, typo.labelSm]
+  const className = [styles.base, active && styles.active, typo.chipSm]
     .filter(Boolean)
     .join(" ");
 
