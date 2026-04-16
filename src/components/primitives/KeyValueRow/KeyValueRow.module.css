@@ -1,0 +1,43 @@
+/* KeyValueRow — one <dt>/<dd> pair inside a card body field grid.
+
+   Typography (font-size, weight, tracking, case) does NOT live here
+   — the component composes labelSm on the <dt> and bodySm on the
+   <dd> from typography.module.css at render time. This file only
+   owns colour, alignment nudges, and descendant styling for inline
+   <code> and <b> elements that appear inside values. */
+
+/* ─── Label (<dt>) ─────────────────────────────────────────────────
+   Muted, right-aligned by the parent grid. The 1px top padding is a
+   baseline-alignment nudge — the smaller 9.5px uppercase label sits
+   slightly high relative to the 12px value text without it. */
+
+.label {
+  color: var(--text-secondary);
+  padding-top: 1px;
+}
+
+/* ─── Value (<dd>) ─────────────────────────────────────────────────
+   Primary text. Children may include <code> and <b> elements styled
+   below. The reset strips the default browser margin on <dd>. */
+
+.value {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Amber-accented emphasis — used for keywords the operator needs to
+   notice at a glance ("Production deploy", "locked", agent names). */
+.value b {
+  color: var(--text-brand-bright);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Inline code tokens — identifiers, authorities, log lines. Styled
+   as a small pill on the raised panel surface with an amber tint. */
+.value code {
+  background: var(--surface-panel-elevated);
+  padding: 1px 5px;
+  color: var(--text-brand);
+  border: var(--border-width-1) solid var(--border-subtle);
+  font-family: var(--font-family-mono);
+}
