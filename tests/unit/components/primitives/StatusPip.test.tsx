@@ -30,4 +30,16 @@ describe("StatusPip", () => {
     expect(className).toContain("sm");
     expect(className).toContain("linked");
   });
+
+  it("defaults to square shape (no circle class)", () => {
+    const { container } = render(<StatusPip variant="nominal" />);
+    expect(container.querySelector("span")?.className).not.toContain("circle");
+  });
+
+  it("applies the circle class when shape is circle", () => {
+    const { container } = render(<StatusPip shape="circle" variant="crit" />);
+    const className = container.querySelector("span")?.className ?? "";
+    expect(className).toContain("circle");
+    expect(className).toContain("crit");
+  });
 });

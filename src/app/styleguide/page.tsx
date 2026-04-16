@@ -362,6 +362,22 @@ export default function Styleguide() {
             </div>
           </div>
 
+          <div className={styles.primitiveCard}>
+            <div className={styles.primitiveDemo}>
+              <StatusPip shape="circle" variant="crit" />
+              <StatusPip shape="circle" variant="linked" />
+              <StatusPip shape="circle" variant="nominal" />
+              <StatusPip shape="circle" variant="stale" />
+              <StatusPip shape="circle" />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>StatusPip · circle</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Rounded shape for roster agent rows.
+              </span>
+            </div>
+          </div>
+
           {/* Badge — uppercase status chip, the most-reused primitive
               in the system. Two appearances (filled, outlined), four
               signal variants + muted default, two sizes, composes

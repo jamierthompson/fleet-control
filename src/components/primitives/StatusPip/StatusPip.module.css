@@ -1,9 +1,11 @@
 /* StatusPip — small inline status indicator dot.
-   A square (intentionally not a circle, to match the phosphor-CRT
-   pixel aesthetic of the rest of the dashboard). The default state
-   is muted gray — the "no signal" pip used at the head of agent
-   class groups when nothing in the group is degraded. Variant
-   classes override the fill and, for crit and linked, add a glow. */
+   Square by default (phosphor-CRT pixel aesthetic), with an optional
+   circle shape for roster agent rows where the softer form
+   distinguishes individual agents from the sharper group-level pips.
+   The default state is muted gray — the "no signal" pip used at the
+   head of agent class groups when nothing in the group is degraded.
+   Variant classes override the fill and, for crit and linked, add
+   a glow. */
 
 .pip {
   display: inline-block;
@@ -21,6 +23,12 @@
 .sm {
   width: var(--size-pip-sm);
   height: var(--size-pip-sm);
+}
+
+/* Shape — circle overrides the default square for roster agent rows. */
+
+.circle {
+  border-radius: 50%;
 }
 
 /* Variants — fill colors come from the signal text tokens, glow

@@ -21,13 +21,25 @@ export type StatusPipVariant = "crit" | "linked" | "nominal" | "stale";
  */
 export type StatusPipSize = "xs" | "sm";
 
+/**
+ * StatusPip shape.
+ *
+ * - `square` (default) — the phosphor-CRT pixel look. Used in class
+ *   group headers, the topbar, and the posture pill.
+ * - `circle` — rounded indicator. Used in individual agent rows in
+ *   the roster, where the softer shape distinguishes row-level pips
+ *   from the sharper group-level squares.
+ */
+export type StatusPipShape = "square" | "circle";
+
 type StatusPipProps = {
   variant?: StatusPipVariant;
   size?: StatusPipSize;
+  shape?: StatusPipShape;
 };
 
 /**
- * StatusPip — small square indicator dot for agent and group status.
+ * StatusPip — small indicator dot for agent and group status.
  *
  * Server Component. The element is presentational — its meaning is
  * always carried by adjacent text (the agent ID, the class label,
@@ -36,9 +48,15 @@ type StatusPipProps = {
  * stale are flat; passing no variant produces the muted gray
  * default.
  */
-export function StatusPip({ variant, size = "xs" }: StatusPipProps) {
+export function StatusPip({
+  variant,
+  size = "xs",
+  shape = "square",
+}: StatusPipProps) {
   const variantClass = variant ? styles[variant] : "";
-  const className = `${styles.pip} ${styles[size]} ${variantClass}`.trimEnd();
+  const shapeClass = shape === "circle" ? styles.circle : "";
+  const className =
+    `${styles.pip} ${styles[size]} ${variantClass} ${shapeClass}`.trimEnd();
 
   return <span className={className} aria-hidden="true" />;
 }
