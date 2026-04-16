@@ -1,0 +1,33 @@
+/* AgentIdBlock — namespaced agent ID with description subtitle.
+
+   Typography does NOT live here — the component composes headingLg
+   on the ID line and metaMd on the description from
+   typography.module.css at render time. This file only owns colour
+   and the vertical stack layout. */
+
+.base {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: var(--font-leading-tight);
+}
+
+/* ─── ID line ──────────────────────────────────────────────────────
+   Primary text for the agent name. The namespace suffix is muted
+   to create a visual split between name and deployment context. */
+
+.id {
+  color: var(--text-primary);
+}
+
+.namespace {
+  color: var(--text-secondary);
+  margin-left: var(--space-4);
+}
+
+/* ─── Description ──────────────────────────────────────────────────
+   Muted subtitle explaining the agent's role. */
+
+.description {
+  color: var(--text-secondary);
+}

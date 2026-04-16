@@ -209,6 +209,20 @@
   letter-spacing: var(--font-tracking-label);
 }
 
+/* ─── meta.* — description and subtitle text under headings ──────────
+   Tighter tracking than label.* because meta lines carry longer,
+   more prose-like text that would look too spread-out at caps
+   tracking widths. Same uppercase treatment, but optimised for
+   readability at sentence-ish lengths. */
+
+.metaMd {
+  composes: upper;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-label);
+}
+
 /* ─── brand.wordmark — SENTRYOS / FLEET topbar lockup ─────────────── */
 
 .brandWordmark {
