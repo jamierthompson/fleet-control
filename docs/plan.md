@@ -26,7 +26,8 @@ A working reference that captures where the project is, the conventions being fo
 | 14| `FunctionKey` primitive            | `feat/function-key-primitive`  | #16 |
 | 15| `AgentIdBlock` primitive + `metaMd` typography | `feat/agent-id-block-primitive` | #17 |
 | 16| `CardButton` primitive             | `feat/card-button-primitive`   | #19 |
-| 17| `AgentRow` primitive + StatusPip shape | `feat/agent-row-primitive`  |     |
+| 17| `AgentRow` primitive + StatusPip shape | `feat/agent-row-primitive`  | #20 |
+| 18| `BrandChip` primitive              | `feat/brand-chip-primitive`    |     |
 
 What exists:
 
@@ -121,7 +122,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 *Full-width black bar with brand chip, breadcrumb path, live meta, clock, user chip.*
 
 - **`LivePulse`** ✓ (#7) — shipped as a 6px *square* (not a circle — matches the phosphor-pixel aesthetic) in nominal green, 1.6s opacity pulse. Server Component, presentational (aria-hidden). Used in the topbar and footer "STREAM OK" status.
-- **`BrandChip`** — amber-filled "SENTRYOS/FLEET" wordmark at the left of the bar. `brandWordmark` typography, black-on-amber.
+- **`BrandChip`** ✓ (#21) — amber-filled `[■] SENTRYOS/FLEET` wordmark. `brandWordmark` typography (11px / 800 / 0.12em tracking / uppercase) on an amber fill, with a 6px black phosphor square prefix and the `/` separator at 55% opacity. No props — the wordmark is fixed product identity. Carries its own **horizontal padding** (`var(--space-14)`) because the amber fill has to extend past the text — padding is load-bearing for the visual, not just breathing room. Fixed cell height, border-right between cells, and vertical centring still belong to the future `TopBar` container. Added the `--size-brand-dot` semantic alias for the phosphor square.
 - **`BreadcrumbPath`** — the `CONTROL › NOW · LOG · REPLAY · PERMISSIONS · COMPLIANCE` nav element. Highlights the current segment.
 - **`TopBarMeta`** — "WS · LIVE" with `LivePulse` + "BUILD 2026.04.15-r3". Composed.
 - **`LiveClock`** — "04:21:33 CT" with a muted tz suffix. Static in code for now; real clock later.
@@ -249,7 +250,7 @@ Each tier numbers independently — adding a primitive to one tier does not casc
 1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text colour shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
 2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
 3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
-4. `BrandChip`, `UserChip`, `LiveClock`, `TopBarMeta` ← LivePulse
+4. ✓ `BrandChip` — amber `[■] SENTRYOS/FLEET` lockup. Carries its own 14px horizontal padding (load-bearing for the amber fill extending past the text); cell height / vertical centring / border-right stay with the future `TopBar`. Added `--size-brand-dot` semantic alias. `UserChip`, `LiveClock`, `TopBarMeta` still to come.
 5. `BreadcrumbPath`
 6. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
 7. `Posture` ← StatusPip
