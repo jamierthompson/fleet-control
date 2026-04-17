@@ -6,6 +6,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { AgentIdBlock } from "@/components/primitives/AgentIdBlock";
 import { AgentRow } from "@/components/primitives/AgentRow";
+import { BrandChip } from "@/components/primitives/BrandChip";
 import { CardButton } from "@/components/primitives/CardButton";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { FilterChip } from "@/components/primitives/FilterChip";
@@ -696,6 +697,35 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>CardButton</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Ghost, default, crit, and primary variants. Optional key hint pill.
+              </span>
+            </div>
+          </div>
+
+          {/* BrandChip — amber SENTRYOS/FLEET wordmark. Rendered inside a
+              32px black strip that simulates the future TopBar bar. The
+              chip carries its own horizontal padding (the amber fill has
+              to extend past the text), but the cell's height and vertical
+              centring still belong to the parent topbar context. */}
+          <div className={styles.primitiveCard} style={{ gridColumn: "1 / -1" }}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                flex: "none",
+                padding: 0,
+                minHeight: "auto",
+                height: "32px",
+                background: "var(--surface-bar-fill)",
+                borderBottom: "var(--border-width-1) solid var(--border-default)",
+                justifyContent: "flex-start",
+                alignItems: "stretch",
+              }}
+            >
+              <BrandChip />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>BrandChip</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Fixed product wordmark for the topbar left edge. No props.
               </span>
             </div>
           </div>

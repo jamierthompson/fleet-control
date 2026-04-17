@@ -1,0 +1,1 @@
+export { BrandChip } from "./BrandChip";

@@ -66,3 +66,8 @@ These hold unless explicitly changed. When in doubt, follow these over anything 
 - Teach as you go. Explain decisions, tradeoffs, and gotchas.
 - Step-by-step: complete one task fully before moving to the next. Check in between tasks.
 - Do not jump ahead to implementation without agreement on the approach.
+
+### Dev environment
+
+- **The user runs the dev server (`pnpm dev`) and does visual checks themselves.** Do not start your own dev server, and do not screenshot every component as it ships — the user will spot visual regressions live.
+- The Chrome DevTools MCP is installed and available if we hit a bug that needs programmatic inspection (console errors, network, DOM state). Reach for it for troubleshooting, not routine verification.

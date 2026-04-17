@@ -1,0 +1,37 @@
+/* BrandChip — amber-filled SENTRYOS/FLEET wordmark lockup.
+
+   The 14px horizontal padding is load-bearing: it is what makes the
+   amber fill extend past the text on either side, matching the mockup.
+   Because the chip carries its own background, the padding has to live
+   on the chip itself — the surrounding topbar cell cannot do it for
+   us. Fixed height, border-right, and vertical centring still belong
+   to the future TopBar cell, not here. */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 0 var(--space-14);
+  background: var(--surface-brand-fill);
+  color: var(--text-on-brand);
+}
+
+/* 6px square phosphor dot. `background: currentColor` means it
+   inherits the brand-on-amber black automatically, which is how
+   BlinkDot also works — same idiom, consistent behaviour. */
+.dot {
+  display: inline-block;
+  width: var(--size-brand-dot);
+  height: var(--size-brand-dot);
+  background: currentColor;
+}
+
+/* The `/` between SENTRYOS and FLEET stays in the same black ink
+   but drops to 55% opacity so the two words read as distinct. Using
+   opacity (rather than a second colour token) is deliberate: it
+   keeps the separator faithful to whatever surface colour the chip
+   is rendered on, so a future "inverted" brand treatment would work
+   without a token change. */
+.slash {
+  opacity: 0.55;
+}

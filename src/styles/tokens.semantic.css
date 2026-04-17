@@ -134,6 +134,7 @@
   --size-pip-xs: var(--size-dot-xs);  /* StatusPip default — 6px (class-heads, agent rows) */
   --size-pip-sm: var(--size-dot-sm);  /* StatusPip small — 8px (posture pill, event glyphs) */
   --size-blink: var(--size-dot-xs);   /* Blink indicator inside crit/proposed badges */
+  --size-brand-dot: var(--size-dot-xs); /* Phosphor square in the BrandChip lockup */
 
   /* ─── motion.* — intent-based animation durations ──────────────── */
 
