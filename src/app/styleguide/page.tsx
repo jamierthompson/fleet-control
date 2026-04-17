@@ -8,6 +8,7 @@ import { AgentIdBlock } from "@/components/primitives/AgentIdBlock";
 import { AgentRow } from "@/components/primitives/AgentRow";
 import { BrandChip } from "@/components/primitives/BrandChip";
 import { CardButton } from "@/components/primitives/CardButton";
+import { UserChip } from "@/components/primitives/UserChip";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
 import { FilterChip } from "@/components/primitives/FilterChip";
 import { FunctionKey } from "@/components/primitives/FunctionKey";
@@ -726,6 +727,35 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>BrandChip</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Fixed product wordmark for the topbar left edge. No props.
+              </span>
+            </div>
+          </div>
+
+          {/* UserChip — avatar box + identity label. Rendered inside the
+              same mock topbar strip used for BrandChip, but the cell
+              itself provides the 14px horizontal padding because UserChip
+              is layout-naked (no own background, so no load-bearing
+              padding). */}
+          <div className={styles.primitiveCard} style={{ gridColumn: "1 / -1" }}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                flex: "none",
+                padding: "0 var(--space-14)",
+                minHeight: "auto",
+                height: "32px",
+                background: "var(--surface-bar-fill)",
+                borderBottom: "var(--border-width-1) solid var(--border-default)",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <UserChip initials="RA">R.AHN · L3 ON-CALL</UserChip>
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>UserChip</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Identity chip for the topbar right edge. Initials prop + label children.
               </span>
             </div>
           </div>

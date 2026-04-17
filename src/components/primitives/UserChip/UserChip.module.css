@@ -1,0 +1,29 @@
+/* UserChip — topbar identity chip.
+
+   No own background: the dim-amber text sits directly on the black
+   topbar bar, so padding, border-right, and vertical centring belong
+   to the future TopBar cell. This module only owns the inline layout,
+   the text colour, the gap between avatar and label, and the avatar
+   box itself. */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--text-brand-dim);
+}
+
+/* Avatar square — 16×16 dark panel with a subtle border and bright
+   amber initials. The 1px border tones down the contrast against the
+   black topbar just enough that the avatar reads as a contained
+   object rather than a coloured patch. */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+  background: var(--surface-panel-elevated);
+  border: var(--border-width-1) solid var(--border-default);
+  color: var(--text-brand);
+}
