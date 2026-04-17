@@ -255,3 +255,19 @@
   line-height: var(--font-leading-flat);
   letter-spacing: var(--font-tracking-caps-wide);
 }
+
+/* ─── nav.path — topbar breadcrumb + sibling-page navigation ──────────
+   Deliberately lighter than the default topbar body text (which is 600).
+   The breadcrumb recedes visually relative to the brand chip, clock, and
+   user chip. Tracking primitive is literally labelled "Topbar items,
+   status meta" in the primitive layer, and the medium weight primitive
+   is labelled "Sibling names, secondary IDs" — this composite is the
+   place where both finally get used. */
+
+.navPath {
+  composes: upper;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-leading-tight);
+  letter-spacing: var(--font-tracking-label-wide);
+}

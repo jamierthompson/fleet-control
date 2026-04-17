@@ -7,6 +7,7 @@ import { BlinkDot } from "@/components/primitives/BlinkDot";
 import { AgentIdBlock } from "@/components/primitives/AgentIdBlock";
 import { AgentRow } from "@/components/primitives/AgentRow";
 import { BrandChip } from "@/components/primitives/BrandChip";
+import { BreadcrumbPath } from "@/components/primitives/BreadcrumbPath";
 import { CardButton } from "@/components/primitives/CardButton";
 import { UserChip } from "@/components/primitives/UserChip";
 import { ConfidenceChip } from "@/components/primitives/ConfidenceChip";
@@ -756,6 +757,38 @@ export default function Styleguide() {
               <span className={`${typo.idAgent} ${styles.tokenName}`}>UserChip</span>
               <span className={`${typo.caption} ${styles.tokenRole}`}>
                 Identity chip for the topbar right edge. Initials prop + label children.
+              </span>
+            </div>
+          </div>
+
+          {/* BreadcrumbPath — topbar nav lockup. Layout-naked like
+              UserChip, so the cell provides the 14px horizontal padding.
+              Shown here with a typical set of ancestors/current/siblings
+              matching the dashboard's CONTROL › NOW · ... path. */}
+          <div className={styles.primitiveCard} style={{ gridColumn: "1 / -1" }}>
+            <div
+              className={styles.primitiveDemo}
+              style={{
+                flex: "none",
+                padding: "0 var(--space-14)",
+                minHeight: "auto",
+                height: "32px",
+                background: "var(--surface-bar-fill)",
+                borderBottom: "var(--border-width-1) solid var(--border-default)",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              <BreadcrumbPath
+                ancestors={["CONTROL"]}
+                current="NOW"
+                siblings={["LOG", "REPLAY", "PERMISSIONS", "COMPLIANCE"]}
+              />
+            </div>
+            <div className={styles.primitiveMeta}>
+              <span className={`${typo.idAgent} ${styles.tokenName}`}>BreadcrumbPath</span>
+              <span className={`${typo.caption} ${styles.tokenRole}`}>
+                Ancestor › current · sibling topbar nav. Three colors.
               </span>
             </div>
           </div>
