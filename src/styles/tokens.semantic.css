@@ -135,6 +135,7 @@
   --size-pip-sm: var(--size-dot-sm);  /* StatusPip small — 8px (posture pill, event glyphs) */
   --size-blink: var(--size-dot-xs);   /* Blink indicator inside crit/proposed badges */
   --size-brand-dot: var(--size-dot-xs); /* Phosphor square in the BrandChip lockup */
+  --size-avatar: var(--size-icon-md);    /* UserChip avatar square (topbar) */
 
   /* ─── motion.* — intent-based animation durations ──────────────── */
 

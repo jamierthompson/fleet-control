@@ -27,7 +27,8 @@ A working reference that captures where the project is, the conventions being fo
 | 15| `AgentIdBlock` primitive + `metaMd` typography | `feat/agent-id-block-primitive` | #17 |
 | 16| `CardButton` primitive             | `feat/card-button-primitive`   | #19 |
 | 17| `AgentRow` primitive + StatusPip shape | `feat/agent-row-primitive`  | #20 |
-| 18| `BrandChip` primitive              | `feat/brand-chip-primitive`    |     |
+| 18| `BrandChip` primitive              | `feat/brand-chip-primitive`    | #21 |
+| 19| `UserChip` primitive               | `feat/user-chip-primitive`     |     |
 
 What exists:
 
@@ -126,7 +127,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 - **`BreadcrumbPath`** — the `CONTROL › NOW · LOG · REPLAY · PERMISSIONS · COMPLIANCE` nav element. Highlights the current segment.
 - **`TopBarMeta`** — "WS · LIVE" with `LivePulse` + "BUILD 2026.04.15-r3". Composed.
 - **`LiveClock`** — "04:21:33 CT" with a muted tz suffix. Static in code for now; real clock later.
-- **`UserChip`** — avatar box + "R.AHN · L3 ON-CALL".
+- **`UserChip`** ✓ (#22) — topbar identity chip: 16×16 dark-panel avatar square with bright-amber initials, followed by the user's handle and role in dim amber. API: `initials` prop for the avatar contents + `children` for the label text (`R.AHN · L3 ON-CALL`) — follows the Badge "props for structure, children for content" pattern. Layout-naked (no own background, so padding/centring/border belong to the future `TopBar` cell). Avatar initials use `labelXs` (9px / 700 / uppercase); identity label uses `labelLg` (11px / 600 / uppercase / 0.10em tracking — the mockup spec is 0.08em but the 0.02em difference is imperceptible at 11px and not worth a new composite). Added the `--size-avatar` semantic alias (→ `--size-icon-md`).
 - **`TopBar`** — the container that composes all of the above into the grid. **[→ depends on: everything above]**
 
 ### 2. Posture strip
@@ -250,11 +251,12 @@ Each tier numbers independently — adding a primitive to one tier does not casc
 1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text colour shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
 2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
 3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
-4. ✓ `BrandChip` — amber `[■] SENTRYOS/FLEET` lockup. Carries its own 14px horizontal padding (load-bearing for the amber fill extending past the text); cell height / vertical centring / border-right stay with the future `TopBar`. Added `--size-brand-dot` semantic alias. `UserChip`, `LiveClock`, `TopBarMeta` still to come.
-5. `BreadcrumbPath`
-6. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
-7. `Posture` ← StatusPip
-8. `StaleMetric`, `SiblingInstance`, `MissedItem`
+4. ✓ `BrandChip` — amber `[■] SENTRYOS/FLEET` lockup. Carries its own 14px horizontal padding (load-bearing for the amber fill extending past the text); cell height / vertical centring / border-right stay with the future `TopBar`. Added `--size-brand-dot` semantic alias.
+5. ✓ `UserChip` — 16×16 avatar square + identity label. Layout-naked (no own background, so padding/centring belong to the future `TopBar` cell). API: `initials` prop + `children` for the label. Added `--size-avatar` semantic alias. `LiveClock`, `TopBarMeta` still to come.
+6. `BreadcrumbPath`
+7. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
+8. `Posture` ← StatusPip
+9. `StaleMetric`, `SiblingInstance`, `MissedItem`
 
 **Tier 3 — mid-level composed primitives.**
 
