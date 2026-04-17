@@ -28,8 +28,8 @@
 
 /* The `/` between SENTRYOS and FLEET stays in the same black ink
    but drops to 55% opacity so the two words read as distinct. Using
-   opacity (rather than a second colour token) is deliberate: it
-   keeps the separator faithful to whatever surface colour the chip
+   opacity (rather than a second color token) is deliberate: it
+   keeps the separator faithful to whatever surface color the chip
    is rendered on, so a future "inverted" brand treatment would work
    without a token change. */
 .slash {

@@ -6,7 +6,7 @@ import styles from "./BlinkDot.module.css";
  * Designed to sit at the start of an attention-grabbing Badge — the
  * `NOW · CRIT` badge on the dashboard and the `PROPOSED` badge on
  * the permissions screen both use one. The dot's background is
- * `currentColor`, so it inherits the surrounding text colour
+ * `currentColor`, so it inherits the surrounding text color
  * automatically and does not need to know which badge variant it
  * is sitting inside.
  *

@@ -43,7 +43,7 @@ type CardButtonProps = {
  * Renders as a <button> with buttonPrimary typography (11px/bold/
  * uppercase/0.12em). The parent CardActionRow (future Tier 3
  * primitive) owns the grid layout and top border; CardButton
- * handles its own padding, colours, variant styles, and the
+ * handles its own padding, colors, variant styles, and the
  * border-left separator between siblings.
  *
  * The first button in a row is typically a ghost variant that spans

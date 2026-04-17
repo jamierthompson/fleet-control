@@ -2,7 +2,7 @@
 
    Typography does NOT live here — the component composes headingLg
    on the ID line and metaMd on the description from
-   typography.module.css at render time. This file only owns colour
+   typography.module.css at render time. This file only owns color
    and the vertical stack layout. */
 
 .base {

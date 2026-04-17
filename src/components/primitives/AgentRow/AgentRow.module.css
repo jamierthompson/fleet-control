@@ -4,7 +4,7 @@
    on the agent name from typography.module.css, and delegates the
    status badge to the Badge primitive. This file owns the grid
    layout, variant-driven background tints, left accent borders,
-   and text colour overrides. */
+   and text color overrides. */
 
 .base {
   display: grid;
@@ -34,7 +34,7 @@
 
 /* ─── Signal variants ──────────────────────────────────────────────
    Each adds a tinted background, a left accent border in the signal
-   colour, and shifts the name/namespace text to variant-specific
+   color, and shifts the name/namespace text to variant-specific
    tints defined in the semantic token layer. */
 
 .crit {

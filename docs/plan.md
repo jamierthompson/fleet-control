@@ -1,6 +1,8 @@
 # Fleet Control — Project Plan
 
-A working reference that captures where the project is, the conventions being followed, and what comes next. Read this before starting any new work so the project stays coherent across sessions.
+A working reference that captures where the project *is* and what comes *next*. Read this before starting any new work so the project stays coherent across sessions.
+
+For the stable *how we work* rules (token discipline, testing, git workflow, styleguide discipline, etc.) and pointers to the source-of-truth files and design-phase references, see [`CLAUDE.md`](../CLAUDE.md). This file deliberately does not duplicate those — it focuses on project state: status, inventory, and build order.
 
 ---
 
@@ -29,87 +31,29 @@ A working reference that captures where the project is, the conventions being fo
 | 17| `AgentRow` primitive + StatusPip shape | `feat/agent-row-primitive`  | #20 |
 | 18| `BrandChip` primitive              | `feat/brand-chip-primitive`    | #21 |
 | 19| `UserChip` primitive               | `feat/user-chip-primitive`     | #22 |
-| 20| `BreadcrumbPath` primitive + `navPath` typography | `feat/breadcrumb-path-primitive` |     |
+| 20| `BreadcrumbPath` primitive + `navPath` typography | `feat/breadcrumb-path-primitive` | #23 |
 
 What exists:
 
 - **Next.js 16 App Router app** with TypeScript, ESLint, src/ layout, no Tailwind.
 - **JetBrains Mono** self-hosted via `next/font/google` at weights 300–800.
-- **Primitive tokens** in `src/styles/tokens.primitive.css` — every color, font size, weight, tracking, leading, spacing, dimension, border width, and motion value from `fleet-control-tokens.md` as CSS custom properties on `:root`.
-- **Semantic tokens** in `src/styles/tokens.semantic.css` — intent-based aliases (`--surface-panel`, `--text-brand`, `--border-signal-crit`) that reference primitives. Components must consume these, never primitives.
-- **Composite typography** in `src/styles/typography.module.css` — the 24 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, etc.) as a CSS Module with `composes:` for shared traits.
+- **Primitive tokens** in `src/styles/tokens.primitive.css` — every color, font size, weight, tracking, leading, spacing, dimension, border width, and motion value as CSS custom properties on `:root`.
+- **Semantic tokens** in `src/styles/tokens.semantic.css` — intent-based aliases (`--surface-panel`, `--text-brand`, `--border-signal-crit`, `--size-avatar`, `--size-brand-dot`) that reference primitives. Components must consume these, never primitives.
+- **Composite typography** in `src/styles/typography.module.css` — 25 named text recipes (`displayXl`, `labelMd`, `buttonPrimary`, `metaMd`, `brandWordmark`, `navPath`, etc.) as a CSS Module with `composes:` for shared traits. Three composites have been added since the initial 24 as specific typography needs came up in primitive work: `metaMd` (AgentIdBlock), `brandWordmark` (BrandChip), `navPath` (BreadcrumbPath).
 - **`/styleguide`** route (`src/app/styleguide/page.tsx`) — a long-scroll in-browser reference rendering every token in the system. This is the Figma replacement and the working canvas for primitive development — every new primitive should be added here as it is built.
 - **Vitest + RTL + jest-dom** wired up with smoke tests for every merged primitive. Add a test alongside every new one.
-- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is underway: `AgentRow`, `AgentIdBlock`, and `CardButton` shipped.
+- **All eight Tier-1 primitives shipped.** Tier-2 (simple composed primitives) is well underway: `AgentRow`, `AgentIdBlock`, `CardButton`, `BrandChip`, `UserChip`, and `BreadcrumbPath` shipped — remaining Tier-2 work is the rest of the topbar (`LiveClock`, `TopBarMeta`), then the posture strip and stale-card primitives.
 
 ---
 
-## Conventions
+## Plan-maintenance rules
 
-These were established in the design-system phase and should hold throughout the project unless explicitly changed.
+Two project-state rules live here (not in CLAUDE.md) because they specifically govern this file:
 
-### Git workflow
+- **Status table** — add a row in the same PR that ships a primitive. The PR number can be backfilled in a tiny follow-up commit after `gh pr create` returns the URL, but the row itself goes in during the main change.
+- **Primitive inventory** — when a primitive turns out to need splitting, merging, or renaming during implementation, update the inventory entry below in the same commit. The inventory is a working map, not a spec — it is expected to evolve.
 
-- Never commit to `main`. Every task gets its own branch.
-- **Branch naming**: `<type>/<kebab-case-summary>` where type is `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, or `style`.
-- **Commits**: Conventional Commits (`feat: …`, `chore: …`, etc.). Keep them small and focused — one logical change per commit. Commit messages explain the *why*, not just the *what*.
-- **PRs**: every task, even solo. PR body has a Summary and Test plan checklist. Merge with **regular merge commits** (`gh pr merge N --merge --delete-branch`), never squash — the feature-branch history is preserved on `main`.
-- Delete local and remote branches after merging.
-- After merging, `git checkout main && git pull` to sync before starting the next task.
-
-### Token discipline
-
-- **Primitives are never referenced by components.** Always consume semantic tokens. The primitives layer exists so the UI can be re-skinned by swapping primitive values without touching any component or alias.
-- **Typography is applied as composite classes** from `typography.module.css`, not as individual `font-size`/`font-weight`/etc. declarations in component styles.
-- If a component needs a value that does not have a semantic token, **add a semantic token first**, then consume it. Do not hardcode.
-
-### Component layout
-
-- All component source lives under `src/` with the `@/*` path alias pointing at `src/*`.
-- **Primitives live in `src/components/primitives/<PrimitiveName>/`** with three files: `<PrimitiveName>.tsx`, `<PrimitiveName>.module.css`, and `<PrimitiveName>.test.tsx`. The folder exports a default component from `index.ts` if useful.
-- Server Components by default. Only add `"use client"` when the primitive actually needs browser APIs, event handlers, or React hooks. Push the boundary as far down the tree as possible.
-- CSS Modules for all component styles. No global CSS except `globals.css` (which only loads token files and sets body defaults).
-
-### Styleguide updates
-
-- **Every new primitive gets a styleguide entry in the same PR that introduces it.** No exceptions. The styleguide is the source of truth for "what exists," and drift between code and styleguide is the failure mode we're preventing.
-- Styleguide entries should show: the primitive rendered in each of its variants, its props (if any), and its position in the composition hierarchy.
-
-### Plan status updates
-
-- **Add a row to the status table at the top of this file in the same PR that ships a primitive.** The table is the at-a-glance view of project progress — if it lags reality, it loses its point. The PR number can be backfilled in a tiny follow-up commit after `gh pr create` returns the URL, but the row itself goes in during the main change.
-
-### Testing
-
-- At minimum, every primitive gets **one smoke test** that renders it with default props and asserts it is in the document. This exists to exercise the CSS Module compilation and catch import-time errors, not to pin behavior.
-- Add more tests only when the primitive has real logic (prop-driven variants, conditional classNames, accessibility state).
-- Tests live in `tests/unit/components/primitives/<PrimitiveName>.test.tsx`.
-
----
-
-## Source of truth
-
-The living source of truth for the design system is the code:
-
-- **`src/styles/tokens.primitive.css`** — every primitive as a CSS custom property.
-- **`src/styles/tokens.semantic.css`** — semantic aliases into primitives.
-- **`src/styles/typography.module.css`** — composite text styles.
-- **The `/styleguide` page** (`src/app/styleguide/page.tsx`) — the living visual reference. If a token or primitive is not on this page, it does not exist in the system.
-
-If the code and the design-phase reference docs below disagree, the code wins — update the docs or discard them.
-
-## Design-phase references
-
-These are the files that seeded the project. They live in the user's local `docs/` folder but are **gitignored** so they are not committed to the repo. They are starting reference, not binding spec:
-
-- **`docs/fleet-control-tokens.md`** — the original token system spec (primitive + semantic tables, composite typography recipes, naming rules).
-- **`docs/fleet-control-tokens.json`** — the tokens in Tokens Studio format, for future Figma import.
-- **`docs/fleet-control.html`** — the full dashboard mockup (the "Now" screen, 1685 lines). This is the visual target Tasks 7+ are rebuilding in React.
-- **`docs/screen-5-permissions.html`** — the permissions DSL editor (1324 lines). Different screen, shares the design system, will be tackled after the main dashboard.
-
-When building a primitive, open the mockup in a browser (`open docs/fleet-control.html`) and inspect elements. The HTML is deliberately over-annotated with section comments.
-
-**If you are starting from a fresh clone** and these files are missing from your local `docs/` folder, ask the user for them — they are not tracked in git.
+All other conventions (token discipline, testing, git workflow, styleguide discipline, component layout, source of truth, design-phase references) live in [`CLAUDE.md`](../CLAUDE.md).
 
 ---
 
@@ -226,7 +170,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 *Primitives that do not belong to any one visual region — reused inside other primitives across the dashboard.*
 
-- **`BlinkDot`** ✓ (#10) — 6px square that blinks 1.05s on a 2-step opacity cycle. `background: currentColor`, so it inherits the surrounding text colour automatically. Composed inside `Badge` for the `NOW · CRIT` dashboard state and the `PROPOSED` permissions-screen state. Was not in the original inventory — discovered during the Badge design conversation.
+- **`BlinkDot`** ✓ (#10) — 6px square that blinks 1.05s on a 2-step opacity cycle. `background: currentColor`, so it inherits the surrounding text color automatically. Composed inside `Badge` for the `NOW · CRIT` dashboard state and the `PROPOSED` permissions-screen state. Was not in the original inventory — discovered during the Badge design conversation.
 
 ---
 
@@ -241,19 +185,19 @@ The principle: **build leaves before branches**. A primitive that composes anoth
 3. ✓ `BlinkDot` (#10) — discovered during Badge design; composed inside Badge
 4. ✓ `Badge` (#11) — consolidated `Badge` + `StatusBadge`
 5. ✓ `KeyValueRow` — shipped as a bare `<dt>`/`<dd>` fragment (no wrapper). Label uses `labelSm` typography (uppercase, muted), value uses `bodySm` (primary text). Values accept rich children (`<code>`, `<b>`). Designed to sit inside a future `FieldGrid` `<dl>` that owns the grid layout.
-6. ✓ `ConfidenceChip` — inline `CONF N%` chip with tier-driven colouring: high (≥90%, bright amber), standard (75–89%, amber), below (<75%, dim amber). Optional delta suffix shows change from a previous value (`↑ from 62%`). Uses `labelMd` for the label, `labelLg` for the value, `caption` for the delta — no custom font declarations in the CSS Module.
+6. ✓ `ConfidenceChip` — inline `CONF N%` chip with tier-driven coloring: high (≥90%, bright amber), standard (75–89%, amber), below (<75%, dim amber). Optional delta suffix shows change from a previous value (`↑ from 62%`). Uses `labelMd` for the label, `labelLg` for the value, `caption` for the delta — no custom font declarations in the CSS Module.
 7. ✓ `FilterChip` — roster filter toggle button. Active state: amber fill, black text. Inactive: muted, transparent. Count at reduced opacity when inactive. Client Component (onClick). `aria-pressed` for accessibility. Right border between siblings removed on `:last-child`.
-8. ✓ `FunctionKey` — footer navigation button with two-part label: key name ("F1") in amber + function label ("NOW") in muted text. Active state: amber fill, all text black. Client Component with `aria-pressed`. Right border between siblings. Uses `labelMd` throughout — key name gets a colour class only.
+8. ✓ `FunctionKey` — footer navigation button with two-part label: key name ("F1") in amber + function label ("NOW") in muted text. Active state: amber fill, all text black. Client Component with `aria-pressed`. Right border between siblings. Uses `labelMd` throughout — key name gets a color class only.
 
 Each tier numbers independently — adding a primitive to one tier does not cascade renumbering through the rest.
 
 **Tier 2 — simple composed primitives.**
 
-1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text colour shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
+1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text color shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
 2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
 3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
 4. ✓ `BrandChip` — amber `[■] SENTRYOS/FLEET` lockup. Carries its own 14px horizontal padding (load-bearing for the amber fill extending past the text); cell height / vertical centring / border-right stay with the future `TopBar`. Added `--size-brand-dot` semantic alias.
-5. ✓ `UserChip` — 16×16 avatar square + identity label. Layout-naked (no own background, so padding/centring belong to the future `TopBar` cell). API: `initials` prop + `children` for the label. Added `--size-avatar` semantic alias. `LiveClock`, `TopBarMeta` still to come.
+5. ✓ `UserChip` — 16×16 avatar square + identity label. Layout-naked (no own background, so padding/centring belong to the future `TopBar` cell). API: `initials` prop + `children` for the label. Added `--size-avatar` semantic alias.
 6. ✓ `BreadcrumbPath` — ancestor / current / sibling topbar nav with three colors. API takes `ancestors?: string[]` + `current: string` + `siblings?: string[]`. Introduced the `navPath` typography composite (11px / 500 / uppercase / 0.08em) — the `--font-weight-medium` and `--font-tracking-label-wide` primitives were already earmarked for this but had no composite consuming them.
 7. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
 8. `Posture` ← StatusPip
@@ -298,4 +242,3 @@ If you are picking this up cold:
 3. **Check `git log --oneline --graph`** to see the commit history shape. Follow the same merge-commit-per-task pattern.
 4. **The user is learning as we go.** Explain decisions, tradeoffs, and gotchas as they arise. Do not jump ahead to implementation without agreement on the approach.
 5. **Check in between tasks.** Do not chain multiple primitives in one session without breaks for review — the point of the leaf-first build order is that each primitive is a discrete, reviewable step.
-6. **Expect to revise this inventory.** It is a working map, not a spec. When a primitive turns out to need splitting, merging, or renaming, update this file in the same commit as the change.

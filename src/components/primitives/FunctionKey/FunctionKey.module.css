@@ -2,7 +2,7 @@
 
    Typography (font-size, weight, tracking, case) does NOT live here
    — the component composes chipMd from typography.module.css at
-   render time. This file owns colour, padding, borders, and the
+   render time. This file owns color, padding, borders, and the
    active/hover states. */
 
 .base {

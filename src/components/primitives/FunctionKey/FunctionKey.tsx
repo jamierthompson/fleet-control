@@ -24,7 +24,7 @@ type FunctionKeyProps = {
  *
  * The parent Footer container owns the overall layout (height,
  * outer borders, grid columns). FunctionKey handles its own
- * padding, colours, and the right-border separator between siblings.
+ * padding, colors, and the right-border separator between siblings.
  *
  * Client Component — needs onClick for screen navigation.
  */

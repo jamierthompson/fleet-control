@@ -6,7 +6,7 @@
    file — the component composes labelSm or labelXs from
    typography.module.css at render time, per the project rule that
    typography is always applied as a composite class. This file
-   only owns the badge's geometry and colour. */
+   only owns the badge's geometry and color. */
 
 .base {
   display: inline-flex;
@@ -15,7 +15,7 @@
   white-space: nowrap;
 
   /* Default (muted / no-signal) outlined treatment. Variant classes
-     below override colour and border-colour without touching the
+     below override color and border-color without touching the
      geometry. */
   color: var(--text-tertiary);
   background: transparent;

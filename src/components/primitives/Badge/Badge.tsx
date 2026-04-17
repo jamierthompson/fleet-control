@@ -9,7 +9,7 @@ import styles from "./Badge.module.css";
  *
  * Omitting the variant produces the muted gray "no signal" default.
  * Used for placeholder tags in summary cells and anywhere a badge
- * needs to render without a status colour. The four explicit
+ * needs to render without a status color. The four explicit
  * variants reuse the same vocabulary as the surrounding signal
  * tokens.
  */
@@ -18,7 +18,7 @@ export type BadgeVariant = "crit" | "linked" | "nominal" | "stale";
 /**
  * Badge appearance — visual emphasis.
  *
- * - `outlined` (default) — coloured text and border, transparent
+ * - `outlined` (default) — colored text and border, transparent
  *   background. Used in summary cells, the roster, and as the
  *   stale form of card-header badges.
  * - `filled` — saturated background fill with contrasting text.

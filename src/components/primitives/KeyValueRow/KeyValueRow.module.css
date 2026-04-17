@@ -3,7 +3,7 @@
    Typography (font-size, weight, tracking, case) does NOT live here
    — the component composes labelSm on the <dt> and bodySm on the
    <dd> from typography.module.css at render time. This file only
-   owns colour, alignment nudges, and descendant styling for inline
+   owns color, alignment nudges, and descendant styling for inline
    <code> and <b> elements that appear inside values. */
 
 /* ─── Label (<dt>) ─────────────────────────────────────────────────

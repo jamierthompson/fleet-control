@@ -10,7 +10,7 @@ describe("ConfidenceChip", () => {
     expect(container.textContent).toContain("87%");
   });
 
-  // ─── Tier colouring ──────────────────────────────────────────────
+  // ─── Tier coloring ──────────────────────────────────────────────
 
   it("applies the 'high' tier class for values ≥ 90", () => {
     const { container } = render(<ConfidenceChip value={94} />);

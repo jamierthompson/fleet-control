@@ -8,7 +8,7 @@ import styles from "./AgentRow.module.css";
 
 /**
  * AgentRow variant — drives the row's background tint, left accent
- * border, and text colour overrides.
+ * border, and text color overrides.
  *
  * Omitting the variant produces the default neutral row — no
  * background tint, no accent border. Used for nominal agents.
@@ -39,7 +39,7 @@ type AgentRowProps = {
  * A 3-column grid row: circle StatusPip + agent name (with optional
  * muted namespace suffix) + Badge showing current status. Signal
  * variants (crit, linked, stale) add a tinted background and a
- * coloured left accent border.
+ * colored left accent border.
  *
  * This is the first primitive that composes other primitives
  * (StatusPip and Badge). It does not handle click/selection — that
