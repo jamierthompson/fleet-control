@@ -15,7 +15,7 @@ A terminal-inspired security operations dashboard. Bloomberg-style amber-on-blac
 The living source of truth for the design system is the code itself:
 
 - **`src/styles/tokens.primitive.css`** and **`src/styles/tokens.semantic.css`** — the design tokens as implemented.
-- **`src/styles/typography.module.css`** — the 24 composite text styles.
+- **`src/styles/typography.module.css`** — the composite text styles (25 as of writing; new composites get added as specific typography needs come up in primitive work — `metaMd`, `brandWordmark`, and `navPath` are examples).
 - **The `/styleguide` page** at `src/app/styleguide/page.tsx` — the living reference for everything that exists. If a token or primitive is not on this page, it does not exist in the system.
 
 ### Design-phase references (local only, not in git)
@@ -33,7 +33,7 @@ These hold unless explicitly changed. When in doubt, follow these over anything 
 
 ### Token discipline
 
-- **Primitives are never referenced by components.** Components must consume semantic tokens from `src/styles/tokens.semantic.css` (`--surface-panel`, `--text-brand`, `--border-signal-crit`). If the value you need does not have a semantic token, add one first, then consume it. Do not hardcode hex values, font sizes, or spacing.
+- **Primitives are never referenced by components.** Components must consume semantic tokens from `src/styles/tokens.semantic.css` (`--surface-panel`, `--text-brand`, `--border-signal-crit`). If the value you need does not have a semantic token, add one first, then consume it. Do not hardcode hex values, font sizes, or spacing. Why: the primitives layer exists so the UI can be re-skinned by swapping primitive values without touching any component or alias.
 - **Typography is applied as composite classes** from `src/styles/typography.module.css` (`displayXl`, `labelMd`, `buttonPrimary`, etc.). Do not declare `font-size`/`font-weight`/etc. individually in component styles.
 - **Compose typography in JSX**, not in CSS Modules. Import `typography.module.css` into the component and join the composite class (`typo.labelSm`, etc.) with the local `styles.base` class on the rendered element. Do not use CSS Module `composes: labelSm from "..."` — it works, but the JSX-level composition is easier to read and keeps `<Primitive>.module.css` focused on geometry and colour only. See `src/components/primitives/Badge/Badge.tsx` for the pattern.
 
@@ -45,13 +45,13 @@ These hold unless explicitly changed. When in doubt, follow these over anything 
 
 ### Styleguide discipline
 
-**Every new primitive gets a styleguide entry in the same PR that introduces it.** The `/styleguide` page at `src/app/styleguide/page.tsx` is the source of truth for "what exists" — drift between the code and the styleguide is the failure mode we prevent. When you build a primitive, render it in the styleguide alongside its variants before opening the PR.
+**Every new primitive gets a styleguide entry in the same PR that introduces it.** The `/styleguide` page at `src/app/styleguide/page.tsx` is the source of truth for "what exists" — drift between the code and the styleguide is the failure mode we prevent. When you build a primitive, render it in the styleguide alongside its variants before opening the PR. Each entry should show: the primitive in each of its variants, its props (if any), and — where helpful — the surrounding context it's designed to sit in (e.g. a mock topbar strip for topbar cells).
 
 ### Testing
 
-- Every primitive gets at least one React Testing Library smoke test that renders it with default props and asserts it is in the document.
+- Every primitive gets at least one React Testing Library smoke test that renders it with default props and asserts it is in the document. Why the smoke test exists: to exercise the CSS Module compilation and catch import-time errors — not to pin behaviour.
 - Tests live in `tests/unit/components/primitives/<PrimitiveName>.test.tsx`.
-- More tests only when the primitive has real logic (prop-driven variants, conditional classNames, accessibility state).
+- More tests only when the primitive has real logic (prop-driven variants, conditional classNames, accessibility state, ordering guarantees).
 
 ### Git workflow
 

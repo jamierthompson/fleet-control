@@ -30,15 +30,16 @@ fleet-control/
 ├── src/
 │   ├── app/                       # App Router routes (/, /styleguide)
 │   ├── components/
-│   │   └── primitives/            # Reusable design-system primitives
+│   │   └── primitives/            # Reusable design-system primitives (14 and counting)
 │   │       ├── Badge/
 │   │       ├── BlinkDot/
 │   │       ├── LivePulse/
-│   │       └── StatusPip/
+│   │       ├── StatusPip/
+│   │       └── ... (see docs/plan.md for the full inventory and status)
 │   └── styles/
 │       ├── tokens.primitive.css   # Raw design tokens (colors, sizes, motion)
 │       ├── tokens.semantic.css    # Intent-based token aliases
-│       ├── typography.module.css  # 24 composite text styles
+│       ├── typography.module.css  # Named composite text styles
 │       └── globals.css            # Body defaults and token imports
 ├── tests/
 │   └── unit/
