@@ -1,0 +1,35 @@
+/* BreadcrumbPath — three-role topbar nav lockup.
+
+   Inline-flex with a 14px gap between every child (segments AND
+   separators) — the visual rhythm is even throughout. Layout-naked:
+   no own background, so horizontal padding and the border-right
+   between topbar cells belong to the future TopBar. */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-14);
+}
+
+/* Parent segments — dim amber because they are "trail" text: you
+   came from here, but the eye should land on the current page. */
+.ancestor {
+  color: var(--text-brand-dim);
+}
+
+/* Current page — primary text, the brightest label in the path so
+   it reads as "you are here." */
+.current {
+  color: var(--text-primary);
+}
+
+/* Sibling views — muted: they exist but are not where you are. */
+.sibling {
+  color: var(--text-secondary);
+}
+
+/* Separator glyphs (› and ·). Tertiary so they fade into the gap
+   rhythm instead of competing with the labels. */
+.separator {
+  color: var(--text-tertiary);
+}

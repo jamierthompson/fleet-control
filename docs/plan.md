@@ -28,7 +28,8 @@ A working reference that captures where the project is, the conventions being fo
 | 16| `CardButton` primitive             | `feat/card-button-primitive`   | #19 |
 | 17| `AgentRow` primitive + StatusPip shape | `feat/agent-row-primitive`  | #20 |
 | 18| `BrandChip` primitive              | `feat/brand-chip-primitive`    | #21 |
-| 19| `UserChip` primitive               | `feat/user-chip-primitive`     |     |
+| 19| `UserChip` primitive               | `feat/user-chip-primitive`     | #22 |
+| 20| `BreadcrumbPath` primitive + `navPath` typography | `feat/breadcrumb-path-primitive` |     |
 
 What exists:
 
@@ -124,7 +125,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 - **`LivePulse`** ✓ (#7) — shipped as a 6px *square* (not a circle — matches the phosphor-pixel aesthetic) in nominal green, 1.6s opacity pulse. Server Component, presentational (aria-hidden). Used in the topbar and footer "STREAM OK" status.
 - **`BrandChip`** ✓ (#21) — amber-filled `[■] SENTRYOS/FLEET` wordmark. `brandWordmark` typography (11px / 800 / 0.12em tracking / uppercase) on an amber fill, with a 6px black phosphor square prefix and the `/` separator at 55% opacity. No props — the wordmark is fixed product identity. Carries its own **horizontal padding** (`var(--space-14)`) because the amber fill has to extend past the text — padding is load-bearing for the visual, not just breathing room. Fixed cell height, border-right between cells, and vertical centring still belong to the future `TopBar` container. Added the `--size-brand-dot` semantic alias for the phosphor square.
-- **`BreadcrumbPath`** — the `CONTROL › NOW · LOG · REPLAY · PERMISSIONS · COMPLIANCE` nav element. Highlights the current segment.
+- **`BreadcrumbPath`** ✓ (#23) — topbar nav lockup with three distinct colors: **ancestors** in dim amber (trail text), **current page** in primary text with `aria-current="page"`, **siblings** in muted grey. `›` separates ancestors from current (hierarchy), `·` separates current from siblings (sibling-list). All separators are tertiary-text color so they recede. API: `ancestors?: string[]` + `current: string` + `siblings?: string[]` — strings only for now; will evolve to `{ label, href }[]` objects when real routing is wired. Renders as a semantic `<nav>`. Layout-naked. Introduced the `navPath` typography composite (11px / 500 / uppercase / 0.08em) — consumes the `--font-weight-medium` + `--font-tracking-label-wide` primitives whose comments were literally labelled for this purpose but had no composite using them.
 - **`TopBarMeta`** — "WS · LIVE" with `LivePulse` + "BUILD 2026.04.15-r3". Composed.
 - **`LiveClock`** — "04:21:33 CT" with a muted tz suffix. Static in code for now; real clock later.
 - **`UserChip`** ✓ (#22) — topbar identity chip: 16×16 dark-panel avatar square with bright-amber initials, followed by the user's handle and role in dim amber. API: `initials` prop for the avatar contents + `children` for the label text (`R.AHN · L3 ON-CALL`) — follows the Badge "props for structure, children for content" pattern. Layout-naked (no own background, so padding/centring/border belong to the future `TopBar` cell). Avatar initials use `labelXs` (9px / 700 / uppercase); identity label uses `labelLg` (11px / 600 / uppercase / 0.10em tracking — the mockup spec is 0.08em but the 0.02em difference is imperceptible at 11px and not worth a new composite). Added the `--size-avatar` semantic alias (→ `--size-icon-md`).
@@ -253,7 +254,7 @@ Each tier numbers independently — adding a primitive to one tier does not casc
 3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
 4. ✓ `BrandChip` — amber `[■] SENTRYOS/FLEET` lockup. Carries its own 14px horizontal padding (load-bearing for the amber fill extending past the text); cell height / vertical centring / border-right stay with the future `TopBar`. Added `--size-brand-dot` semantic alias.
 5. ✓ `UserChip` — 16×16 avatar square + identity label. Layout-naked (no own background, so padding/centring belong to the future `TopBar` cell). API: `initials` prop + `children` for the label. Added `--size-avatar` semantic alias. `LiveClock`, `TopBarMeta` still to come.
-6. `BreadcrumbPath`
+6. ✓ `BreadcrumbPath` — ancestor / current / sibling topbar nav with three colors. API takes `ancestors?: string[]` + `current: string` + `siblings?: string[]`. Introduced the `navPath` typography composite (11px / 500 / uppercase / 0.08em) — the `--font-weight-medium` and `--font-tracking-label-wide` primitives were already earmarked for this but had no composite consuming them.
 7. `StripAction` (the Badge-based `Pill` was consolidated into Badge)
 8. `Posture` ← StatusPip
 9. `StaleMetric`, `SiblingInstance`, `MissedItem`
