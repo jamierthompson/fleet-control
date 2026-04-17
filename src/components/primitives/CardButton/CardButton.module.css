@@ -2,7 +2,7 @@
 
    Typography does NOT live here — the component composes
    buttonPrimary on the button and chipSm on the key hint from
-   typography.module.css at render time. This file owns colour,
+   typography.module.css at render time. This file owns color,
    padding, borders, variant states, and the key hint pill. */
 
 /* ─── Base ─────────────────────────────────────────────────────────

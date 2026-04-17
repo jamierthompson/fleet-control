@@ -1,5 +1,5 @@
 /* BlinkDot — 6px square that blinks its opacity on a 1.05s 2-step loop.
-   Designed to sit inside a Badge whose foreground colour we want to
+   Designed to sit inside a Badge whose foreground color we want to
    inherit, so background uses currentColor. The 2-step animation is
    intentional — it's a hard on/off blink, not a smooth pulse like
    LivePulse — to read as a more urgent "attention" signal in the

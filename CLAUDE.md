@@ -35,7 +35,7 @@ These hold unless explicitly changed. When in doubt, follow these over anything 
 
 - **Primitives are never referenced by components.** Components must consume semantic tokens from `src/styles/tokens.semantic.css` (`--surface-panel`, `--text-brand`, `--border-signal-crit`). If the value you need does not have a semantic token, add one first, then consume it. Do not hardcode hex values, font sizes, or spacing. Why: the primitives layer exists so the UI can be re-skinned by swapping primitive values without touching any component or alias.
 - **Typography is applied as composite classes** from `src/styles/typography.module.css` (`displayXl`, `labelMd`, `buttonPrimary`, etc.). Do not declare `font-size`/`font-weight`/etc. individually in component styles.
-- **Compose typography in JSX**, not in CSS Modules. Import `typography.module.css` into the component and join the composite class (`typo.labelSm`, etc.) with the local `styles.base` class on the rendered element. Do not use CSS Module `composes: labelSm from "..."` — it works, but the JSX-level composition is easier to read and keeps `<Primitive>.module.css` focused on geometry and colour only. See `src/components/primitives/Badge/Badge.tsx` for the pattern.
+- **Compose typography in JSX**, not in CSS Modules. Import `typography.module.css` into the component and join the composite class (`typo.labelSm`, etc.) with the local `styles.base` class on the rendered element. Do not use CSS Module `composes: labelSm from "..."` — it works, but the JSX-level composition is easier to read and keeps `<Primitive>.module.css` focused on geometry and color only. See `src/components/primitives/Badge/Badge.tsx` for the pattern.
 
 ### Component layout
 

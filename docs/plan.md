@@ -170,7 +170,7 @@ Dependency relationships are noted as **[→ depends on: X, Y]**. Primitives wit
 
 *Primitives that do not belong to any one visual region — reused inside other primitives across the dashboard.*
 
-- **`BlinkDot`** ✓ (#10) — 6px square that blinks 1.05s on a 2-step opacity cycle. `background: currentColor`, so it inherits the surrounding text colour automatically. Composed inside `Badge` for the `NOW · CRIT` dashboard state and the `PROPOSED` permissions-screen state. Was not in the original inventory — discovered during the Badge design conversation.
+- **`BlinkDot`** ✓ (#10) — 6px square that blinks 1.05s on a 2-step opacity cycle. `background: currentColor`, so it inherits the surrounding text color automatically. Composed inside `Badge` for the `NOW · CRIT` dashboard state and the `PROPOSED` permissions-screen state. Was not in the original inventory — discovered during the Badge design conversation.
 
 ---
 
@@ -185,15 +185,15 @@ The principle: **build leaves before branches**. A primitive that composes anoth
 3. ✓ `BlinkDot` (#10) — discovered during Badge design; composed inside Badge
 4. ✓ `Badge` (#11) — consolidated `Badge` + `StatusBadge`
 5. ✓ `KeyValueRow` — shipped as a bare `<dt>`/`<dd>` fragment (no wrapper). Label uses `labelSm` typography (uppercase, muted), value uses `bodySm` (primary text). Values accept rich children (`<code>`, `<b>`). Designed to sit inside a future `FieldGrid` `<dl>` that owns the grid layout.
-6. ✓ `ConfidenceChip` — inline `CONF N%` chip with tier-driven colouring: high (≥90%, bright amber), standard (75–89%, amber), below (<75%, dim amber). Optional delta suffix shows change from a previous value (`↑ from 62%`). Uses `labelMd` for the label, `labelLg` for the value, `caption` for the delta — no custom font declarations in the CSS Module.
+6. ✓ `ConfidenceChip` — inline `CONF N%` chip with tier-driven coloring: high (≥90%, bright amber), standard (75–89%, amber), below (<75%, dim amber). Optional delta suffix shows change from a previous value (`↑ from 62%`). Uses `labelMd` for the label, `labelLg` for the value, `caption` for the delta — no custom font declarations in the CSS Module.
 7. ✓ `FilterChip` — roster filter toggle button. Active state: amber fill, black text. Inactive: muted, transparent. Count at reduced opacity when inactive. Client Component (onClick). `aria-pressed` for accessibility. Right border between siblings removed on `:last-child`.
-8. ✓ `FunctionKey` — footer navigation button with two-part label: key name ("F1") in amber + function label ("NOW") in muted text. Active state: amber fill, all text black. Client Component with `aria-pressed`. Right border between siblings. Uses `labelMd` throughout — key name gets a colour class only.
+8. ✓ `FunctionKey` — footer navigation button with two-part label: key name ("F1") in amber + function label ("NOW") in muted text. Active state: amber fill, all text black. Client Component with `aria-pressed`. Right border between siblings. Uses `labelMd` throughout — key name gets a color class only.
 
 Each tier numbers independently — adding a primitive to one tier does not cascade renumbering through the rest.
 
 **Tier 2 — simple composed primitives.**
 
-1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text colour shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
+1. ✓ `AgentRow` ← StatusPip (circle shape), Badge. 3-column grid row: circle pip + agent name (idAgent typography, optional muted namespace) + sm Badge. Variant-driven (crit/linked/stale) background tints, left accent borders, and text color shifts. Server Component. Also added `shape` prop ("square" | "circle") to StatusPip.
 2. ✓ `AgentIdBlock` — namespaced agent ID (headingLg) + muted namespace suffix + description subtitle (new `metaMd` typography composite). Server Component. The `metaMd` composite fills a gap in the typography system: 10px/600/uppercase with `--font-tracking-label` (0.06em), tighter than `labelMd`'s caps tracking.
 3. ✓ `CardButton` — card action row button. Four variants: default (amber text), primary (amber fill), crit (red fill), ghost (muted text). Optional `keyHint` renders a bordered pill with a keyboard shortcut. `buttonPrimary` typography on the button, `chipSm` on the key hint. Client Component. Border-left between siblings, first-child left-aligned.
 4. ✓ `BrandChip` — amber `[■] SENTRYOS/FLEET` lockup. Carries its own 14px horizontal padding (load-bearing for the amber fill extending past the text); cell height / vertical centring / border-right stay with the future `TopBar`. Added `--size-brand-dot` semantic alias.

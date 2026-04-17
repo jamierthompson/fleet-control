@@ -1,9 +1,9 @@
-/* ConfidenceChip — inline confidence percentage with tier colouring.
+/* ConfidenceChip — inline confidence percentage with tier coloring.
 
    Typography (font-size, weight, tracking, case) does NOT live here
    — the component composes labelMd on the container, labelLg on the
    value, and caption on the delta from typography.module.css at
-   render time. This file only owns colour and layout. */
+   render time. This file only owns color and layout. */
 
 .base {
   display: inline-flex;
@@ -13,7 +13,7 @@
 }
 
 /* ─── Value — the percentage number ────────────────────────────────
-   Coloured by tier. The three tiers map to the confidence ramp in
+   Colored by tier. The three tiers map to the confidence ramp in
    tokens.semantic.css — reskin by changing the primitive values. */
 
 .value {

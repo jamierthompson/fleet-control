@@ -16,7 +16,7 @@ import styles from "./ConfidenceChip.module.css";
 type ConfidenceTier = "high" | "standard" | "below";
 
 type ConfidenceChipProps = {
-  /** Confidence percentage (0–100). Drives the colour tier. */
+  /** Confidence percentage (0–100). Drives the color tier. */
   value: number;
   /**
    * Previous confidence percentage. When present, the chip renders
@@ -41,13 +41,13 @@ function getTier(value: number): ConfidenceTier {
 }
 
 /**
- * ConfidenceChip — inline confidence percentage with tier colouring.
+ * ConfidenceChip — inline confidence percentage with tier coloring.
  *
  * Used in card headers (`CONF 94%`) and finding headers where it can
  * also show a delta from a previous value (`CONF 87% ↑ from 62%`).
  *
  * The "CONF" label uses labelMd typography (uppercase, muted). The
- * percentage value steps up to labelLg for emphasis, coloured by the
+ * percentage value steps up to labelLg for emphasis, colored by the
  * computed tier. The optional delta uses caption typography at a
  * subdued weight.
  *

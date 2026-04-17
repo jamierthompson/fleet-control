@@ -13,7 +13,7 @@ import styles from "./BrandChip.module.css";
  * The wordmark is fixed product identity, so the component takes no
  * props. Layout around it (fixed height, horizontal padding, border)
  * is intentionally owned by the parent topbar cell, not by the chip
- * itself — the chip only provides its own background, colour, inline
+ * itself — the chip only provides its own background, color, inline
  * layout, and inter-element gap. This matches the mockup, where a
  * cross-cutting `.topbar > *` rule drives the cell geometry.
  *

@@ -11,7 +11,7 @@ type BreadcrumbPathProps = {
    */
   ancestors?: string[];
   /**
-   * The currently-viewed page. Rendered in primary-text colour and
+   * The currently-viewed page. Rendered in primary-text color and
    * marked with `aria-current="page"` for screen readers.
    */
   current: string;
@@ -30,10 +30,10 @@ type BreadcrumbPathProps = {
  *
  *     CONTROL › NOW · LOG · REPLAY · PERMISSIONS · COMPLIANCE
  *
- * Three colour roles — ancestors are dim amber (they led to here),
+ * Three color roles — ancestors are dim amber (they led to here),
  * the current page is bright primary text (we are here), and siblings
  * are muted grey (you could be there instead). Separators use the
- * tertiary text colour so they fade into the background — the labels
+ * tertiary text color so they fade into the background — the labels
  * are what the eye should track.
  *
  * Emits a semantic `<nav>` with `aria-current="page"` on the active

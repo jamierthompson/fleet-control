@@ -477,7 +477,7 @@ export default function Styleguide() {
           </div>
 
           {/* ConfidenceChip — inline confidence percentage with tier
-              colouring. Shows all three tiers and the delta variant. */}
+              coloring. Shows all three tiers and the delta variant. */}
           <div className={styles.primitiveCard}>
             <div
               className={styles.primitiveDemo}
